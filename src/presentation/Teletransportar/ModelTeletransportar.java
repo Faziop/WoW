@@ -5,8 +5,10 @@
  */
 package presentation.Teletransportar;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import logic.Jugador;
 
 /**
  *
@@ -14,7 +16,17 @@ import java.util.Observer;
  */
 public class ModelTeletransportar extends Observable {
  
+    private ArrayList<Jugador> jugadores;
+    
         public ModelTeletransportar() {
+    }
+        
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(ArrayList<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
     
     @Override
