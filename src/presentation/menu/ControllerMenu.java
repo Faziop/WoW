@@ -35,10 +35,18 @@ public class ControllerMenu {
     }
 
     public void menu(String opcion) {
-        if (opcion.equals("Agregar")) {
-            Application.CONTROLLER_AGREGAR.getView().setVisible(true);
-        } else if (opcion.equals("Borrar")) {
-            Application.CONTROLLER_BORRAR.getView().setVisible(true);
+        switch (opcion) {
+            case "Agregar":
+                Application.CONTROLLER_AGREGAR.getView().setVisible(true);
+                break;
+            case "Borrar":
+                Application.CONTROLLER_BORRAR.getView().setVisible(true);
+                break;
+            case "Teletransportar":
+                Application.CONTROLLER_TELETRANSPORTAR.getView().setVisible(true);
+                break;
+            default:
+                break;
         }
     }
 }

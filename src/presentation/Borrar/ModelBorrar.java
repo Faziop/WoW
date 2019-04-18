@@ -41,10 +41,7 @@ public class ModelBorrar extends Observable {
     }
 
     public void llenarTabla() {
-        for (Jugador j : this.jugadores){
-            Object[] o = new Object[]{j.getNombre(), j.getNivel(), j.getGenero(), j.getRaza().getNombre(), j.getClase().getNombre(), j.getFaccion().getNombre(), j.getUbicacion().getNombre()};
-            this.tableModel.addRow(o);
-        }
+        
     }
 
 }

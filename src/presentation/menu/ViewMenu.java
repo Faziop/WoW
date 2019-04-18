@@ -52,6 +52,11 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
         jb_listado.setText("Listado de jugadores");
 
         jb_teletransportar.setText("Teletransportar");
+        jb_teletransportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_teletransportarActionPerformed(evt);
+            }
+        });
 
         jl_titulo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jl_titulo.setText("¿Qué desea hacer?");
@@ -120,6 +125,10 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
     private void jb_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarActionPerformed
         this.controller.menu("Borrar");
     }//GEN-LAST:event_jb_borrarActionPerformed
+
+    private void jb_teletransportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_teletransportarActionPerformed
+        this.controller.menu("Teletransportar");
+    }//GEN-LAST:event_jb_teletransportarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jb_agregar;

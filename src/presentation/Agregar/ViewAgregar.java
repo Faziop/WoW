@@ -47,11 +47,6 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
         }
     }
 
-    public void limpiar() {
-        this.jtf_nombre.setText("");
-        this.jbg_genero.clearSelection();
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,7 +234,6 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
 
             this.controller.agregar();
             JOptionPane.showMessageDialog(null, "Se agregó correctamente", "Info", JOptionPane.INFORMATION_MESSAGE);
-            this.limpiar();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

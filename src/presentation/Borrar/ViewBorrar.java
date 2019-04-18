@@ -2,19 +2,16 @@ package presentation.Borrar;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
  * @author alefa
  */
-public class ViewBorrar extends javax.swing.JFrame implements Observer {
+public class ViewBorrar extends javax.swing.JFrame implements Observer{
 
     private ModelBorrar model;
     private ControllerBorrar controller;
-
+    
     public ViewBorrar() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,13 +29,6 @@ public class ViewBorrar extends javax.swing.JFrame implements Observer {
     public void setVisible(boolean b) {
         super.setVisible(b);
         this.model.setTableModel((DefaultTableModel) jt_jugadores.getModel());
-        this.model.getTableModel().setRowCount(0);
-        try {
-            this.controller.llenarTabla();
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -104,6 +94,7 @@ public class ViewBorrar extends javax.swing.JFrame implements Observer {
     private javax.swing.JTable jt_jugadores;
     // End of variables declaration//GEN-END:variables
 
+    
     @Override
     public void update(Observable o, Object arg) {
     }
