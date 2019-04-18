@@ -48,6 +48,9 @@ public class ControllerMenu {
             case "Localizar":
                 Application.CONTROLLER_LOCALIZAR.getView().setVisible(true);
                 break; 
+            case "Listar":
+                Application.CONTROLLER_LISTAR.getView().setVisible(true);
+                break; 
             default:
                 break;
         }

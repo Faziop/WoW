@@ -51,7 +51,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
                 {null, null, null, null}
             },
             new String [] {
-                "Jugador", "Clase", "Raza", "Region"
+                "Jugador", "Clase", "Raza", "Ubicación"
             }
         ) {
             boolean[] canEdit = new boolean [] {

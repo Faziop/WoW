@@ -229,4 +229,35 @@ public class Dao {
 
         return jugador;
     }
+
+    public ArrayList<Jugador> listaJugadoresFiltro(String nombre) throws SQLException, Exception {
+        String sql;
+        
+        if(nombre.equals(""))
+            sql = String.format("select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado, jugador.nivel from Jugador where jugador.conectado = true");
+        else
+            sql = String.format("select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado, jugador.nivel from Jugador where jugador.conectado = true and nombre like '%%%s%%'", nombre);
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+
+            while (rs.next()) {
+                Jugador jugador = new Jugador();
+                jugador.setNombre(rs.getString("nombre"));
+                jugador.setRaza(getRaza(rs.getInt("raza")));
+                jugador.setClase(getClase(rs.getInt("clase")));
+                jugador.setUbicacion(getSitio(rs.getInt("ubicacion")));
+                jugador.setConectado((rs.getInt("conectado") == 1));
+                jugador.setNivel(rs.getInt("nivel"));
+                jugadores.add(jugador);
+            }
+        } finally {
+            db.disconnect();
+        }
+
+        return jugadores;
+        
+    }
 }
