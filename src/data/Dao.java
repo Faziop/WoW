@@ -55,7 +55,7 @@ public class Dao {
     }
     
     public Sitio getSitio(int numero) throws Exception {
-        String sql = String.format("select * from Sitio where identificador = %d", numero);
+        String sql = String.format("select sitio.identificador, sitio.nombre from Sitio where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -77,7 +77,7 @@ public class Dao {
     }
     
     public Continente getContinente(int numero) throws Exception {
-        String sql = String.format("select * from Continente where identificador = %d", numero);
+        String sql = String.format("select continente.identificador, continente.nombre from Continente where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -100,7 +100,7 @@ public class Dao {
     }
     
     public Region getRegion(int numero) throws Exception {
-        String sql = String.format("select * from Region where identificador = %d", numero);
+        String sql = String.format("select region.identificador, region.nombre, region.continente from Region where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -123,7 +123,7 @@ public class Dao {
     }
     
     public Raza getRaza(int numero) throws Exception {
-        String sql = String.format("select * from Raza where identificador = %d", numero);
+        String sql = String.format("select raza.identificador, raza.nombre, raza.region from Raza where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -145,7 +145,7 @@ public class Dao {
     }
     
     public Clase getClase(int numero) throws Exception {
-        String sql = String.format("select * from Clase where identificador = %d", numero);
+        String sql = String.format("select clase.identificador, clase.nombre from Clase where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -178,7 +178,7 @@ public class Dao {
     }
     
     public ArrayList<Jugador> listaJugadoresTele() throws Exception {
-        String sql = "select * from Jugador";
+        String sql = "select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado from Jugador where jugador.conectado = true";
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         try {
@@ -214,5 +214,21 @@ public class Dao {
         } finally {
             db.disconnect();
         }
+    }
+
+    public Jugador getJugador(String nombre) throws SQLException, Exception {
+        String sql = String.format("select jugador.ubicacion, jugador.raza from Jugador where nombre = '%s'", nombre);
+        Jugador jugador = new Jugador();
+
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+            jugador.setUbicacion(getSitio(rs.getInt("ubicacion")));
+            jugador.setRaza(getRaza(rs.getInt("raza")));
+        } finally {
+            db.disconnect();
+        }
+
+        return jugador;
     }
 }

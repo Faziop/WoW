@@ -69,6 +69,11 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
         });
 
         jb_localizar.setText("Localizar");
+        jb_localizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_localizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +134,10 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
     private void jb_teletransportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_teletransportarActionPerformed
         this.controller.menu("Teletransportar");
     }//GEN-LAST:event_jb_teletransportarActionPerformed
+
+    private void jb_localizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_localizarActionPerformed
+        this.controller.menu("Localizar");
+    }//GEN-LAST:event_jb_localizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jb_agregar;

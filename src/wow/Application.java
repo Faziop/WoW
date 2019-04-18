@@ -7,6 +7,10 @@ import presentation.Agregar.ViewAgregar;
 import presentation.Borrar.ControllerBorrar;
 import presentation.Borrar.ModelBorrar;
 import presentation.Borrar.ViewBorrar;
+import presentation.Localizar.ControllerLocalizar;
+import presentation.Localizar.ModelLocalizar;
+import presentation.Localizar.ViewJugadores;
+import presentation.Localizar.ViewLocalizar;
 import presentation.Teletransportar.ControllerTeletransportar;
 import presentation.Teletransportar.ModelTeletransportar;
 import presentation.Teletransportar.ViewTeletransportar;
@@ -23,6 +27,8 @@ public class Application {
     public static ControllerAgregar CONTROLLER_AGREGAR;
     public static ControllerBorrar CONTROLLER_BORRAR;
     public static ControllerTeletransportar CONTROLLER_TELETRANSPORTAR;
+    public static ControllerLocalizar CONTROLLER_LOCALIZAR;
+
     
     public static void main(String[] args) {
         RelDatabase rdb = new RelDatabase();
@@ -47,6 +53,11 @@ public class Application {
         ViewTeletransportar vt = new ViewTeletransportar();
         ControllerTeletransportar ct = new ControllerTeletransportar(mt, vt);        
         CONTROLLER_TELETRANSPORTAR = ct;
+        
+        ModelLocalizar ml = new ModelLocalizar();
+        ViewJugadores vl = new ViewJugadores();
+        ControllerLocalizar cl = new ControllerLocalizar(ml, vl);        
+        CONTROLLER_LOCALIZAR = cl;
         
         vm.setVisible(true);
     }

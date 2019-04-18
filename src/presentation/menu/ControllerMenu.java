@@ -45,6 +45,9 @@ public class ControllerMenu {
             case "Teletransportar":
                 Application.CONTROLLER_TELETRANSPORTAR.getView().setVisible(true);
                 break;
+            case "Localizar":
+                Application.CONTROLLER_LOCALIZAR.getView().setVisible(true);
+                break; 
             default:
                 break;
         }
