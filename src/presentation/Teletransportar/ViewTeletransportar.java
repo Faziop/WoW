@@ -12,20 +12,19 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import logic.Jugador;
 
-
 public class ViewTeletransportar extends javax.swing.JFrame implements Observer {
 
     private ModelTeletransportar model;
     private ControllerTeletransportar controller;
     private BufferedImage image;
-
+    
     public ViewTeletransportar() {
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
         this.setLocationRelativeTo(null);
         this.repaint();
     }
-    
+
     public void setModel(ModelTeletransportar model) {
         this.model = model;
     }
@@ -33,7 +32,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     public void setController(ControllerTeletransportar controller) {
         this.controller = controller;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,7 +44,8 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mapa");
+        setResizable(false);
 
         jScrollPane1.setViewportView(jLabel1);
 
@@ -93,21 +93,23 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
-                        .addGap(0, 1307, Short.MAX_VALUE)))
+                        .addGap(0, 1138, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addComponent(jButton1))
+                    .addComponent(jButton2))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,17 +157,9 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
         controller.viewJugadores.setVisible(true);
-        
     }//GEN-LAST:event_jButton4ActionPerformed
 
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-    
     private Image ZoomImage(int w, int h, Image img){
         BufferedImage buf = new BufferedImage(w,h, BufferedImage.TYPE_INT_RGB);
         Graphics2D grf =  buf.createGraphics();
@@ -222,7 +216,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         } catch(Exception e){}
         
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -231,4 +225,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {}
 }
