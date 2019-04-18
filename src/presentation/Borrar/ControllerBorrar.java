@@ -37,9 +37,14 @@ public class ControllerBorrar {
     public void setView(ViewBorrar view) {
         this.view = view;
     }
+    
+    public void llenarTabla() throws Exception {
+        this.listaJugadores();
+        this.model.llenarTabla();
+    }
 
     public void listaJugadores() throws Exception {
-        
+        this.model.setJugadores(logic.Model.instance().getDb().listaJugadores());
     }
     
     public void borrar(String nombre) throws Exception {

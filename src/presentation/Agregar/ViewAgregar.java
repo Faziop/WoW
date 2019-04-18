@@ -210,6 +210,11 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
         this.jb_raza.setIcon(new ImageIcon(getClass().getResource("/images/" + this.jcb_raza.getSelectedItem() + ".jpg")));
     }//GEN-LAST:event_jcb_razaActionPerformed
 
+    public void limpiar(){
+        this.jtf_nombre.setText("");
+        this.jbg_genero.clearSelection();
+    }
+    
     private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
         try {
             this.isValido();
@@ -233,6 +238,7 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
             this.model.getRaza().setNombre(jcb_raza.getSelectedItem() + "");
 
             this.controller.agregar();
+            this.limpiar();
             JOptionPane.showMessageDialog(null, "Se agregó correctamente", "Info", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {

@@ -8,7 +8,11 @@ package data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import logic.Clase;
+import logic.Faccion;
 import logic.Jugador;
+import logic.Raza;
+import logic.Sitio;
 import wow.Application;
 
 /*
