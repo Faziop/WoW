@@ -125,12 +125,12 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         
         try {
             controller.updateUbicacion(jTextField1.getText(),jComboBox1.getSelectedIndex() + 1);
+            this.cargarDatos();
+            this.controller.getView().repaint();
         } catch (Exception ex) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(this, "El jugador no existe, o no está conectado actualmente.");
         }
         
-        this.cargarDatos();
-        this.controller.getView().repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void cargarDatos(){

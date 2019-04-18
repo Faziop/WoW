@@ -202,13 +202,11 @@ public class Dao {
     }
 
     public void updateUbicacion(String nombre, Integer ubicacion) throws SQLException, Exception {
-        String sql = String.format("update Jugador set ubicacion = %d where nombre = '%s'", ubicacion, nombre);
+        String sql = String.format("update Jugador set ubicacion = %d where nombre = '%s' and conectado = true", ubicacion, nombre);
 
         try {
             db.connect();
-            if (db.executeUpdate(sql) == -1) {
-
-            } else {
+            if (db.executeUpdate(sql) != -1) {
                 throw new Exception();
             }
         } finally {

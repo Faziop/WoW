@@ -114,11 +114,11 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         
         try {
             controller.getJugador(jTextField1.getText());
+            this.controller.viewLocalizar.setVisible(true);
         } catch (Exception ex) {
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(this, "El jugador no existe, o no está conectado actualmente.");
         }
         
-        this.controller.viewLocalizar.setVisible(true);
         this.cargarDatos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
