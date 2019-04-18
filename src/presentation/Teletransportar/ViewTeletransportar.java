@@ -6,11 +6,8 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import logic.Jugador;
@@ -46,9 +43,9 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1340, 1340));
 
         jScrollPane1.setViewportView(jLabel1);
 
@@ -73,6 +70,13 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
             }
         });
 
+        jButton4.setText("Teleport");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,26 +84,30 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addGap(0, 1307, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,7 +118,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
            
            int w = jLabel1.getWidth();
            int h = jLabel1.getHeight();
-           File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\output.jpg");
+           File file = new File("src\\images\\output.jpg");
            Image img = ImageIO.read(file);
            ImageIcon icon = new ImageIcon(ZoomImage(w-1000, h-1000, img));
            jLabel1.setIcon(icon);
@@ -125,7 +133,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
            
            int w = jLabel1.getWidth();
            int h = jLabel1.getHeight();
-           File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\output.jpg");
+           File file = new File("src\\images\\output.jpg");
            Image img = ImageIO.read(file);
            ImageIcon icon = new ImageIcon(ZoomImage(w+1000, h+1000, img));
            jLabel1.setIcon(icon);
@@ -139,12 +147,18 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         try{
             int w = 3482;
             int h = 995;
-            File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\output.jpg");
+            File file = new File("src\\images\\output.jpg");
             Image img = ImageIO.read(file);
             ImageIcon icon = new ImageIcon(ZoomImage(w, h, img));
             jLabel1.setIcon(icon);
         } catch(Exception e){}
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        controller.viewJugadores.setVisible(true);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     @Override
@@ -167,17 +181,29 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         
         for(Jugador jugador : model.getJugadores()){
             
-            if(jugador.getRaza().getRegion().getId() == 1){
+            if(jugador.isConectado()){
 
                 try{
-                    File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\"+
-                            String.valueOf(cont == 100 ? "Mapa" : "output")+".jpg");
+                    File file = new File("src\\images\\"+ String.valueOf(cont == 100 ? "Mapa" : "output")+".jpg");
                     BufferedImage im = ImageIO.read(file);
-                    File file2 = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\Humano.jpg");
+                    File file2 = new File("src\\images\\" + jugador.getRaza().getNombre() + ".jpg");
                     BufferedImage im2 = ImageIO.read(file2);
                     Graphics2D g2 = im.createGraphics();
-                    g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
-                    ImageIO.write(im, "jpeg", new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\output.jpg"));
+                    
+                    switch (jugador.getUbicacion().getId()) {
+                        case 2:
+                            g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
+                            break;
+                        case 1:
+                            g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + cont) / 4, 100, 100, null);
+                            break;
+                        default:
+                            g2.drawImage(im2, (im.getWidth()) / 2, (im.getHeight() - (im.getHeight() + cont) / 4), 100, 100, null);
+                            break;
+                    }
+
+
+                    ImageIO.write(im, "jpg", new File("src\\images\\output.jpg"));
                     cont += 200;
                 }catch(Exception e) {}
             }
@@ -188,37 +214,20 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
             
             int w = 3482;
             int h = 995;
-            File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\output.jpg");
+            File file = new File("src\\images\\output.jpg");
             Image img = ImageIO.read(file);
             ImageIcon icon = new ImageIcon(ZoomImage(w, h, img));
             jLabel1.setIcon(icon);
             
         } catch(Exception e){}
         
-        /*int cont = 100;
-        
-        for(Jugador jugador : model.getJugadores()){
-            
-            if(jugador.getRaza().getRegion().getId() == 1){
-                
-                try {
-                    
-                    File file = new File("C:\\Users\\LoLER\\OneDrive - Universidad Nacional de Costa Rica\\Documentos\\Bases de datos\\Examen\\WoW\\src\\images\\Humano.jpg");
-                    image = ImageIO.read(file);
-                    g.drawImage(image, cont, 100, 100, 100, null);
-                    cont += 100;
-                    
-                } catch (IOException ex) {}
-                
-            }
-            
-        }*/
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

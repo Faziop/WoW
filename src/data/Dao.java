@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import logic.Clase;
+import logic.Continente;
 import logic.Faccion;
 import logic.Jugador;
 import logic.Raza;
@@ -42,11 +43,56 @@ public class Dao {
         }
     }
     
+    private Sitio getObjetoSitio(ResultSet rs) throws Exception {
+        try {
+            Sitio sitio = new Sitio();
+            sitio.setId(rs.getInt("identificador"));
+            sitio.setNombre(rs.getString("nombre"));
+            return sitio;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public Sitio getSitio(int numero) throws Exception {
+        String sql = String.format("select * from Sitio where identificador = %d", numero);
+
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return getObjetoSitio(rs);
+        } else {
+            throw new Exception();
+        }
+    }
+    
+    private Continente getObjetoContinente(ResultSet rs) throws Exception {
+        try {
+            Continente continente = new Continente();
+            continente.setId(rs.getInt("identificador"));
+            continente.setNombre(rs.getString("nombre"));
+            return continente;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    public Continente getContinente(int numero) throws Exception {
+        String sql = String.format("select * from Continente where identificador = %d", numero);
+
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return getObjetoContinente(rs);
+        } else {
+            throw new Exception();
+        }
+    }
+    
     private Region getObjetoRegion(ResultSet rs) throws Exception {
         try {
             Region region = new Region();
-            region.setId(rs.getInt("id"));
+            region.setId(rs.getInt("identificador"));
             region.setNombre(rs.getString("nombre"));
+            region.setContinente(getContinente(rs.getInt("continente")));
             return region;
         } catch (SQLException ex) {
             return null;
@@ -54,7 +100,7 @@ public class Dao {
     }
     
     public Region getRegion(int numero) throws Exception {
-        String sql = String.format("select * from Region where id = %d", numero);
+        String sql = String.format("select * from Region where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -67,7 +113,7 @@ public class Dao {
     private Raza getObjetoRaza(ResultSet rs) throws Exception {
         try {
             Raza raza = new Raza();
-            raza.setId(rs.getInt("id"));
+            raza.setId(rs.getInt("identificador"));
             raza.setNombre(rs.getString("nombre"));
             raza.setRegion(getRegion(rs.getInt("region")));
             return raza;
@@ -77,7 +123,7 @@ public class Dao {
     }
     
     public Raza getRaza(int numero) throws Exception {
-        String sql = String.format("select * from Raza where id = %d", numero);
+        String sql = String.format("select * from Raza where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -90,7 +136,7 @@ public class Dao {
     private Clase getObjetoClase(ResultSet rs) throws Exception {
         try {
             Clase clase = new Clase();
-            clase.setId(rs.getInt("id"));
+            clase.setId(rs.getInt("identificador"));
             clase.setNombre(rs.getString("nombre"));
             return clase;
         } catch (SQLException ex) {
@@ -99,7 +145,7 @@ public class Dao {
     }
     
     public Clase getClase(int numero) throws Exception {
-        String sql = String.format("select * from Clase where id = %d", numero);
+        String sql = String.format("select * from Clase where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
@@ -132,7 +178,7 @@ public class Dao {
     }
     
     public ArrayList<Jugador> listaJugadoresTele() throws Exception {
-        String sql = "select jugador.nombre, jugador.genero, jugador.color_de_piel, jugador.nivel, jugador.raza, jugador.clase, jugador.faccion, jugador.ubicacion, clase.id, clase.nombre, raza.nombre, faccion.nombre, sitio.nombre from Jugador, Clase, Raza, Faccion, Sitio where Jugador.raza = Raza.id and Jugador.clase = Clase.id and Jugador.faccion = Faccion.id";
+        String sql = "select * from Jugador";
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         try {
@@ -141,7 +187,11 @@ public class Dao {
 
             while (rs.next()) {
                 Jugador jugador = new Jugador();
+                jugador.setNombre(rs.getString("nombre"));
                 jugador.setRaza(getRaza(rs.getInt("raza")));
+                jugador.setClase(getClase(rs.getInt("clase")));
+                jugador.setUbicacion(getSitio(rs.getInt("ubicacion")));
+                jugador.setConectado((rs.getInt("conectado") == 1));
                 jugadores.add(jugador);
             }
         } finally {
@@ -151,4 +201,18 @@ public class Dao {
         return jugadores;
     }
 
+    public void updateUbicacion(String nombre, Integer ubicacion) throws SQLException, Exception {
+        String sql = String.format("update Jugador set ubicacion = %d where nombre = '%s'", ubicacion, nombre);
+
+        try {
+            db.connect();
+            if (db.executeUpdate(sql) == -1) {
+
+            } else {
+                throw new Exception();
+            }
+        } finally {
+            db.disconnect();
+        }
+    }
 }

@@ -66,12 +66,14 @@ CREATE TABLE Jugador(
     clase INT,
     faccion INT,
     ubicacion INT,
+    conectado boolean,
     CONSTRAINT pkJugador PRIMARY KEY(nombre),
     CONSTRAINT fk1Jugador FOREIGN KEY(raza, clase) REFERENCES RazaClase(raza, clase),
     CONSTRAINT fk2Jugador FOREIGN KEY(raza, faccion) REFERENCES RazaFaccion(raza, faccion),
     CONSTRAINT fk3Jugador FOREIGN KEY(ubicacion) REFERENCES Sitio(identificador),
     CONSTRAINT ch1Jugador CHECK(genero = 'Masculino' OR genero = 'Femenino'),
     CONSTRAINT ch2Jugador CHECK(color_de_piel = 'Blanco' OR color_de_piel = 'Negro' OR color_de_piel = 'Moreno'),
+    CONSTRAINT ch3Jugador CHECK(conectado = 1 OR conectado = 2),
     CONSTRAINT un1Jugador UNIQUE(nombre)
 );
 
@@ -183,7 +185,13 @@ INSERT INTO Atributo(identificador,nombre) VALUES(5,'Armamento');
 
 -- FALTA AGREGAR MAS SITIOS, CON SUS RESPECTIVAS VILLAS Y ALDEAS
 
-INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(1,'Vertormenta', 'Villa', NULL); 
+---Estos sitios son para poder realizar el teletransporte basándolo sólo en continentes
+INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(1,'Azerot', 'Continente', NULL);
+INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(2,'Kalindor', 'Continente', NULL);
+INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(3,'Pandarian', 'Continente', NULL);
+--
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(4,'Vertormenta', 'Villa', NULL); 
 
 INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(1,'Region Azerot 1', 1, 1);
 UPDATE Sitio SET region = 1 WHERE identificador = 1;
@@ -379,3 +387,5 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(2, 2, 10);
 INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
+
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion) VALUES("Erick", 0, 1, 1, 1, 1);
