@@ -73,7 +73,7 @@ CREATE TABLE Jugador(
     CONSTRAINT fk3Jugador FOREIGN KEY(ubicacion) REFERENCES Sitio(identificador),
     CONSTRAINT ch1Jugador CHECK(genero = 'Masculino' OR genero = 'Femenino'),
     CONSTRAINT ch2Jugador CHECK(color_de_piel = 'Blanco' OR color_de_piel = 'Negro' OR color_de_piel = 'Moreno'),
-    CONSTRAINT ch3Jugador CHECK(conectado = 1 OR conectado = 2),
+    CONSTRAINT ch3Jugador CHECK(conectado = true OR conectado = false),
     CONSTRAINT un1Jugador UNIQUE(nombre)
 );
 
@@ -388,4 +388,7 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion) VALUES("Erick", 0, 1, 1, 1, 1);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Erick", 0, 1, 1, 1, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Fazio", 0, 2, 2, 1, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Alonso", 0, 3, 3, 1, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Gonzalo", 0, 4, 4, 1, 1, false);
