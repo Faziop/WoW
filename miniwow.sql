@@ -85,7 +85,7 @@ CREATE TABLE Objeto(
     equipado TEXT,
     jugador TEXT,
     CONSTRAINT pkObjeto PRIMARY KEY(identificador),
-    CONSTRAINT fk1Objeto FOREIGN KEY(jugador) REFERENCES Jugador(nombre)
+    CONSTRAINT fk1Objeto FOREIGN KEY(jugador) REFERENCES Jugador(nombre)  ON DELETE CASCADE
 );
 
 -- Tablas JOIN
@@ -143,7 +143,7 @@ CREATE TABLE AtributoJugador(
     jugador TEXT,
     CONSTRAINT pkAtributoJugador PRIMARY KEY(atributo, clase, jugador),
     CONSTRAINT fk1AtributoJugador FOREIGN KEY(atributo, clase) REFERENCES ClaseAtributo(atributo, clase),
-    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)	
+    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)  ON DELETE CASCADE	
 	--CONSTRAINT ch1AtributoJugador CHECK()
 );
 
@@ -153,7 +153,7 @@ CREATE TABLE AtributoObjeto(
     clase INT,
     jugador TEXT,
 	objeto INT,
-    CONSTRAINT fk1AtributoObjeto FOREIGN KEY(atributo, clase, jugador) REFERENCES AtributoJugador(atributo, clase, jugador),
+    CONSTRAINT fk1AtributoObjeto FOREIGN KEY(atributo, clase, jugador) REFERENCES AtributoJugador(atributo, clase, jugador) ON DELETE CASCADE,
     CONSTRAINT fk2AtributoObjeto FOREIGN KEY(objeto) REFERENCES Objeto(identificador)
 );
 
@@ -388,7 +388,7 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Erick", 0, 1, 1, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Fazio", 0, 2, 2, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Alonso", 0, 3, 3, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Gonzalo", 0, 4, 4, 1, 1, false);
+INSERT INTO Jugador(nombre, color_de_piel, genero, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Erick", "Blanco", "Masculino", 0, 1, 1, 1, 1, true);
+INSERT INTO Jugador(nombre, color_de_piel, genero, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Fazio", "Blanco", "Masculino", 0, 2, 2, 1, 1, true);
+INSERT INTO Jugador(nombre, color_de_piel, genero, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Alonso", "Negro", "Femenino", 0, 3, 3, 1, 1, true);
+INSERT INTO Jugador(nombre, color_de_piel, genero, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Gonzalo", "Moreno", "Masculino",0, 4, 4, 1, 1, false);

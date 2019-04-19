@@ -15,7 +15,6 @@ import logic.Jugador;
 import logic.Raza;
 import logic.Region;
 import logic.Sitio;
-import wow.Application;
 
 /*
  * @author alefa
@@ -29,8 +28,8 @@ public class Dao {
     }
 
     public void agregarJugador(Jugador j) throws Exception {
-        String sql = "insert into Jugador (nombre, genero, color_de_piel, nivel, raza, clase, faccion, ubicacion)"
-                + "values ('%s', '%s', '%s', %d, %d, %d, %d, %d)";
+        String sql = "insert into Jugador (nombre, genero, color_de_piel, nivel, raza, clase, faccion, ubicacion, conectado)"
+                + "values ('%s', '%s', '%s', %d, %d, %d, %d, %d , true)";
         sql = String.format(sql, j.getNombre(), j.getGenero(), j.getColor(), j.getNivel(), j.getRaza().getId(), j.getClase().getId(), j.getFaccion().getId(), 1);
         try {
             db.connect();
@@ -42,7 +41,7 @@ public class Dao {
             db.disconnect();
         }
     }
-    
+
     private Sitio getObjetoSitio(ResultSet rs) throws Exception {
         try {
             Sitio sitio = new Sitio();
@@ -53,7 +52,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Sitio getSitio(int numero) throws Exception {
         String sql = String.format("select sitio.identificador, sitio.nombre from Sitio where identificador = %d", numero);
 
@@ -64,7 +63,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     private Continente getObjetoContinente(ResultSet rs) throws Exception {
         try {
             Continente continente = new Continente();
@@ -75,7 +74,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Continente getContinente(int numero) throws Exception {
         String sql = String.format("select continente.identificador, continente.nombre from Continente where identificador = %d", numero);
 
@@ -86,7 +85,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     private Region getObjetoRegion(ResultSet rs) throws Exception {
         try {
             Region region = new Region();
@@ -98,7 +97,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Region getRegion(int numero) throws Exception {
         String sql = String.format("select region.identificador, region.nombre, region.continente from Region where identificador = %d", numero);
 
@@ -109,7 +108,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     private Raza getObjetoRaza(ResultSet rs) throws Exception {
         try {
             Raza raza = new Raza();
@@ -121,7 +120,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Raza getRaza(int numero) throws Exception {
         String sql = String.format("select raza.identificador, raza.nombre, raza.region from Raza where identificador = %d", numero);
 
@@ -143,7 +142,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Clase getClase(int numero) throws Exception {
         String sql = String.format("select clase.identificador, clase.nombre from Clase where identificador = %d", numero);
 
@@ -154,9 +153,9 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     public ArrayList<Jugador> listaJugadores() throws Exception {
-        String sql = "select jugador.nombre, jugador.genero, jugador.color_de_piel, jugador.nivel, jugador.raza, jugador.clase, jugador.faccion, jugador.ubicacion, clase.id, clase.nombre, raza.nombre, faccion.nombre, sitio.nombre from Jugador, Clase, Raza, Faccion, Sitio where Jugador.raza = Raza.id and Jugador.clase = Clase.id and Jugador.faccion = Faccion.id";
+        String sql = "select jugador.nombre, jugador.genero, jugador.nivel, clase.nombre, raza.nombre, faccion.nombre, sitio.nombre from Jugador, Clase, Raza, Faccion, Sitio where Jugador.raza = Raza.identificador and Jugador.clase = Clase.identificador and Jugador.faccion = Faccion.identificador and Jugador.ubicacion = Sitio.identificador";
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         try {
@@ -164,11 +163,16 @@ public class Dao {
             ResultSet rs = db.executeQuery(sql);
 
             while (rs.next()) {
-                jugadores.add(new Jugador(rs.getString("nombre"), rs.getString("genero"), rs.getString("color_de_piel"), rs.getInt("nivel"),
-                        new Clase(-1, rs.getString(9)),
-                        new Raza(-1, rs.getString(10)),
-                        new Faccion(-1, rs.getString(11)),
-                        new Sitio(-1, rs.getString(12), null, null), true));
+                Jugador jugador = new Jugador();
+                jugador.setNombre(rs.getString("nombre"));
+                jugador.setGenero(rs.getString("genero"));
+                jugador.setNivel(rs.getInt("nivel"));
+                jugador.setClase(new Clase(-1, rs.getString(3)));
+                jugador.setRaza(new Raza(-1, rs.getString(4)));
+                jugador.setFaccion(new Faccion(-1, rs.getString(5)));
+                jugador.setUbicacion(new Sitio(-1, rs.getString(6), null, null));
+
+                jugadores.add(jugador);
             }
         } finally {
             db.disconnect();
@@ -176,7 +180,7 @@ public class Dao {
 
         return jugadores;
     }
-    
+
     public ArrayList<Jugador> listaJugadoresTele() throws Exception {
         String sql = "select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado from Jugador where jugador.conectado = true";
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -232,11 +236,12 @@ public class Dao {
 
     public ArrayList<Jugador> listaJugadoresFiltro(String nombre) throws SQLException, Exception {
         String sql;
-        
-        if(nombre.equals(""))
+
+        if (nombre.equals("")) {
             sql = String.format("select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado, jugador.nivel from Jugador where jugador.conectado = true");
-        else
+        } else {
             sql = String.format("select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado, jugador.nivel from Jugador where jugador.conectado = true and nombre like '%%%s%%'", nombre);
+        }
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         try {
@@ -258,6 +263,21 @@ public class Dao {
         }
 
         return jugadores;
-        
+
+    }
+
+    public void deleteJugador(String nombre) throws Exception {
+        String sql = String.format("delete from Jugador where nombre = '%s'", nombre);
+
+        try {
+            db.connect();
+            if (db.executeUpdate(sql) == 0) {
+                throw new Exception("No se pudo borrar");
+            }
+
+        } finally {
+            db.disconnect();
+        }
+
     }
 }
