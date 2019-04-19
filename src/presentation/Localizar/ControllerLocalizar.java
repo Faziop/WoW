@@ -18,11 +18,6 @@ public class ControllerLocalizar {
         this.model.addObserver(viewLocalizar);
         view.setModel(model);
         view.setController(this);
-        try {
-            this.listaJugadores();
-        } catch (Exception ex) {
-            
-        }
     }
 
     public ModelLocalizar getModel() {

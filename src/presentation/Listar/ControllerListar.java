@@ -11,11 +11,6 @@ public class ControllerListar {
         this.model.addObserver(view);
         view.setModel(model);
         view.setController(this);
-        try {
-            this.listaJugadores();
-        } catch (Exception ex) {
-            
-        }
     }
 
     public ModelListar getModel() {

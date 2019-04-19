@@ -23,6 +23,16 @@ public class ViewLocalizar extends javax.swing.JFrame implements Observer {
         this.setLocationRelativeTo(null);
         this.repaint();
     }
+    
+    @Override
+    public void setVisible(boolean b) {
+        try {
+            super.setVisible(b);
+            this.controller.llenarTabla();
+        } catch (Exception ex) {
+            
+        }
+    }
 
     public void setModel(ModelLocalizar model) {
         this.model = model;
