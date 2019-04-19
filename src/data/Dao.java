@@ -167,10 +167,10 @@ public class Dao {
                 jugador.setNombre(rs.getString("nombre"));
                 jugador.setGenero(rs.getString("genero"));
                 jugador.setNivel(rs.getInt("nivel"));
-                jugador.setClase(new Clase(-1, rs.getString(3)));
-                jugador.setRaza(new Raza(-1, rs.getString(4)));
-                jugador.setFaccion(new Faccion(-1, rs.getString(5)));
-                jugador.setUbicacion(new Sitio(-1, rs.getString(6), null, null));
+                jugador.setClase(new Clase(-1, rs.getString(4)));
+                jugador.setRaza(new Raza(-1, rs.getString(5)));
+                jugador.setFaccion(new Faccion(-1, rs.getString(6)));
+                jugador.setUbicacion(new Sitio(-1, rs.getString(7), null, null));
 
                 jugadores.add(jugador);
             }

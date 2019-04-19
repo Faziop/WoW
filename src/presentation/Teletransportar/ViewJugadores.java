@@ -3,16 +3,20 @@ package presentation.Teletransportar;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewJugadores extends javax.swing.JFrame implements Observer {
 
     private ModelTeletransportar model;
     private ControllerTeletransportar controller;
-    
+
     public ViewJugadores() {
         initComponents();
         this.setLocationRelativeTo(null);
+        DefaultTableCellRenderer alinear = (DefaultTableCellRenderer) jTable1.getCellRenderer(0, 0);
+        alinear.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
     public void setModel(ModelTeletransportar model) {
@@ -22,13 +26,13 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
     public void setController(ControllerTeletransportar controller) {
         this.controller = controller;
     }
-    
+
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b);
         this.cargarDatos();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,6 +46,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         jButton1 = new javax.swing.JButton();
 
         setTitle("Jugadores online");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,30 +127,31 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         try {
-            controller.updateUbicacion(jTextField1.getText(),jComboBox1.getSelectedIndex() + 1);
+            controller.updateUbicacion(jTextField1.getText(), jComboBox1.getSelectedIndex() + 1);
             this.cargarDatos();
             this.controller.getView().repaint();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "El jugador no existe, o no está conectado actualmente.");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void cargarDatos(){
+    public void cargarDatos() {
         DefaultTableModel d = (DefaultTableModel) jTable1.getModel();
         this.model.setTableModel(d);
         this.model.getTableModel().setRowCount(0);
-        try{
+        try {
             this.controller.llenarTabla();
-        } catch (Exception e){
-            JOptionPane.showConfirmDialog(null, e.getMessage() ,"Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     @Override
-    public void update(Observable o, Object arg) {}
+    public void update(Observable o, Object arg) {
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
