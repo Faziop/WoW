@@ -88,6 +88,13 @@ CREATE TABLE Objeto(
     CONSTRAINT fk1Objeto FOREIGN KEY(jugador) REFERENCES Jugador(nombre)
 );
 
+CREATE TABLE Encantamiento(
+    identificador INT,
+    nombre TEXT,
+    valor INT,
+    CONSTRAINT pkEncantamiento PRIMARY KEY(identificador)
+);
+
 -- Tablas JOIN
 
 CREATE TABLE RazaFaccion(
@@ -155,6 +162,15 @@ CREATE TABLE AtributoObjeto(
 	objeto INT,
     CONSTRAINT fk1AtributoObjeto FOREIGN KEY(atributo, clase, jugador) REFERENCES AtributoJugador(atributo, clase, jugador),
     CONSTRAINT fk2AtributoObjeto FOREIGN KEY(objeto) REFERENCES Objeto(identificador)
+);
+
+CREATE TABLE ObjetoEncantamiento(
+    objeto INT,
+    encantamiento INT,    
+    valor INT,
+    CONSTRAINT pkObjetoEncantamiento PRIMARY KEY(objeto, encantamiento),
+    CONSTRAINT fk1ObjetoEncantamiento FOREIGN KEY(objeto) REFERENCES Objeto(identificador),
+    CONSTRAINT fk2ObjetoEncantamiento FOREIGN KEY(encantamiento) REFERENCES Encantamiento(identificador)
 );
 
 -- Datos pre-establecidos

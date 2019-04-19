@@ -42,6 +42,9 @@ public class ControllerMenu {
             case "Borrar":
                 Application.CONTROLLER_BORRAR.getView().setVisible(true);
                 break;
+            case "Equipar":
+                Application.CONTROLLER_EQUIPAR.mostrar();
+                break;
             case "Teletransportar":
                 Application.CONTROLLER_TELETRANSPORTAR.getView().setVisible(true);
                 break;
