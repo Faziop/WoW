@@ -16,11 +16,6 @@ public class ControllerTeletransportar {
         this.model.addObserver(viewJugadores);
         view.setModel(model);
         view.setController(this);
-        try {
-            this.listaJugadores();
-        } catch (Exception ex) {
-            
-        }
     }
 
     public ModelTeletransportar getModel() {

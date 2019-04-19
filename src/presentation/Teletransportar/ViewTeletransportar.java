@@ -28,6 +28,16 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         this.repaint();
     }
 
+    @Override
+    public void setVisible(boolean b) {
+        try {
+            super.setVisible(b);
+            this.controller.llenarTabla();
+        } catch (Exception ex) {
+            
+        }
+    }
+    
     public void setModel(ModelTeletransportar model) {
         this.model = model;
     }

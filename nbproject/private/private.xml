@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/presentation/Borrar/ControllerBorrar.java</file>
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/presentation/Borrar/ModelBorrar.java</file>
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/presentation/Borrar/ViewBorrar.java</file>
@@ -11,6 +12,28 @@
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/presentation/Teletransportar/ViewTeletransportar.java</file>
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/data/Dao.java</file>
             <file>file:/C:/Users/alefa/Documents/NetBeansProjects/WoW/src/presentation/Agregar/ViewAgregar.java</file>
+=======
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Localizar/ViewLocalizar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Teletransportar/ControllerTeletransportar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/menu/ViewMenu.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/data/Dao.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/miniwow.sql</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Listar/ViewJugadores.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Localizar/ModelLocalizar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Listar/ControllerListar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Borrar/ModelBorrar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Teletransportar/ViewJugadores.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Listar/ModelListar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Teletransportar/ModelTeletransportar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/data/RelDatabase.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/menu/ControllerMenu.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Borrar/ViewBorrar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Localizar/ControllerLocalizar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/wow/Application.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/menu/ModelMenu.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Teletransportar/ViewTeletransportar.java</file>
+            <file>file:/C:/Users/LoLER/OneDrive%20-%20Universidad%20Nacional%20de%20Costa%20Rica/Documentos/Bases%20de%20datos/Examen/WoW/src/presentation/Localizar/ViewJugadores.java</file>
+>>>>>>> master
         </group>
     </open-files>
 </project-private>
