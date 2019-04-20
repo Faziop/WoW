@@ -67,7 +67,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         });
         jScrollPane2.setViewportView(jt_jugadores);
 
-        jcb_region.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azerot", "Kalindor", "Pandarian" }));
+        jcb_region.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vertormenta", "Rut theran", "Mandori", "Verdemar", "Murohelecho", "Gallywix" }));
 
         jl_region.setText("Región:");
 
@@ -92,7 +92,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
                         .addComponent(jl_region)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jcb_region, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

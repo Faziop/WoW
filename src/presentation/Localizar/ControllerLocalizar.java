@@ -1,7 +1,5 @@
 package presentation.Localizar;
 
-import presentation.Teletransportar.*;
-
 public class ControllerLocalizar {
     
     private ModelLocalizar model;

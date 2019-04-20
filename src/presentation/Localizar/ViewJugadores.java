@@ -104,8 +104,10 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         try {
             if (jt_jugadores.getSelectedRow() == -1) {
                 JOptionPane.showMessageDialog(null, "No hay fila seleccionada", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             } else if (jt_jugadores.getSelectedRowCount() > 1) {
                 JOptionPane.showMessageDialog(null, "Más de una fila seleccionada", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             } else {
                 controller.getJugador(jt_jugadores.getValueAt(jt_jugadores.getSelectedRow(), 0).toString());
             }
@@ -117,6 +119,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
         }
 
         this.cargarDatos();
+        
     }//GEN-LAST:event_jb_localizarActionPerformed
 
     public void cargarDatos() {
@@ -132,8 +135,7 @@ public class ViewJugadores extends javax.swing.JFrame implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-    }
+    public void update(Observable o, Object arg) {}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;

@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import logic.Jugador;
@@ -32,7 +30,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     public void setVisible(boolean b) {
         try {
             super.setVisible(b);
-            this.controller.llenarTabla();
+            this.controller.listaJugadores();
         } catch (Exception ex) {
             
         }
@@ -183,35 +181,60 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
 
         if(model.getJugadores() != null){
         
-            int cont = 100;
+            int contVertor = 100;
+            int contVerde = 100;
+            int contRut = 100;
+            int contMuro = 100;
+            int contMando = 100;
+            int contGally = 100;
+            
+            boolean flag = true;
 
             for(Jugador jugador : model.getJugadores()){
 
                 if(jugador.isConectado()){
 
                     try{
-                        File file = new File("src\\images\\"+ String.valueOf(cont == 100 ? "Mapa" : "output")+".jpg");
+                        File file = new File("src\\images\\"+ String.valueOf(flag == true ? "Mapa" : "output")+".jpg");
                         BufferedImage im = ImageIO.read(file);
                         File file2 = new File("src\\images\\" + jugador.getRaza().getNombre() + ".jpg");
                         BufferedImage im2 = ImageIO.read(file2);
                         Graphics2D g2 = im.createGraphics();
 
                         switch (jugador.getUbicacion().getId()) {
-                            case 2:
-                                g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
-                                break;
                             case 1:
-                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + cont) / 4, 100, 100, null);
+                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + contVertor) / 4, 100, 100, null);
+                                contVertor += 200;
                                 break;
-                            default:
-                                g2.drawImage(im2, (im.getWidth()) / 2, (im.getHeight() - (im.getHeight() + cont) / 4), 100, 100, null);
+                            case 2:
+                                g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + contVerde) / 2, 100, 100, null);
+                                contVerde += 200;
+                                break;
+                            case 3:
+                                g2.drawImage(im2, (im.getWidth() - 400) / 2, (im.getHeight() - (im.getHeight() - contRut) / 4), 100, 100, null);
+                                contRut += 200;
+                                break;
+                            case 4:
+                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() - im.getHeight() + contMuro) / 4, 100, 100, null);
+                                contMuro += 200;
+                                break;
+                            case 5:
+                                g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() - im.getHeight() + contMando) / 2, 100, 100, null);
+                                contMando += 200;
+                                break;
+                            case 6:
+                                g2.drawImage(im2, (im.getWidth() + 500) / 2, (im.getHeight() - (im.getHeight() - contGally) / 4), 100, 100, null);
+                                contGally -= 200;
                                 break;
                         }
 
 
                         ImageIO.write(im, "jpg", new File("src\\images\\output.jpg"));
-                        cont += 200;
+                        
                     }catch(Exception e) {}
+                    
+                    flag = false;
+                    
                 }
             }
         }

@@ -28,7 +28,7 @@ public class ViewLocalizar extends javax.swing.JFrame implements Observer {
     public void setVisible(boolean b) {
         try {
             super.setVisible(b);
-            this.controller.llenarTabla();
+            this.controller.listaJugadores();
         } catch (Exception ex) {
             
         }

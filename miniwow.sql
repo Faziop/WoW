@@ -183,24 +183,35 @@ INSERT INTO Atributo(identificador,nombre) VALUES(3,'Mana');
 INSERT INTO Atributo(identificador,nombre) VALUES(4,'Agilidad');
 INSERT INTO Atributo(identificador,nombre) VALUES(5,'Armamento');
 
--- FALTA AGREGAR MAS SITIOS, CON SUS RESPECTIVAS VILLAS Y ALDEAS
-
----Estos sitios son para poder realizar el teletransporte basándolo sólo en continentes
-INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(1,'Azerot', 'Continente', NULL);
-INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(2,'Kalindor', 'Continente', NULL);
-INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(3,'Pandarian', 'Continente', NULL);
---
-
-INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(4,'Vertormenta', 'Villa', NULL); 
-
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(1,'Vertormenta', 'Villa', NULL); 
 INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(1,'Region Azerot 1', 1, 1);
 UPDATE Sitio SET region = 1 WHERE identificador = 1;
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(4,'Verdemar', 'Aldea', NULL); 
+INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(4,'Region Azerot 2', 4, 1);
+UPDATE Sitio SET region = 4 WHERE identificador = 4;
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(2,'Rut theran', 'Aldea', NULL); 
+INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(2,'Region Kalindor 1', 2, 2);
+UPDATE Sitio SET region = 2 WHERE identificador = 2;
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(5,'Murohelecho', 'Villa', NULL); 
+INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(5,'Region Kalindor 2', 5, 2);
+UPDATE Sitio SET region = 5 WHERE identificador = 5;
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(3,'Mandori', 'Aldea', NULL); 
+INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(3,'Region Pandarian 1', 3, 3);
+UPDATE Sitio SET region = 3 WHERE identificador = 3;
+
+INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(6,'Gallywix', 'Villa', NULL); 
+INSERT INTO Region(identificador,nombre,ciudad_capital,continente) VALUES(6,'Region Pandarian 2', 6, 3);
+UPDATE Sitio SET region = 6 WHERE identificador = 6;
 
 INSERT INTO Raza(identificador,nombre,region) VALUES(1,'Humano',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(2,'Enano',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(3,'Elfo de la noche',1);
-INSERT INTO Raza(identificador,nombre,region) VALUES(4,'Nono',1);
-INSERT INTO Raza(identificador,nombre,region) VALUES(5,'Dranei',1);
+INSERT INTO Raza(identificador,nombre,region) VALUES(4,'Gnomo',1);
+INSERT INTO Raza(identificador,nombre,region) VALUES(5,'Draenei',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(6,'Hombre lobo',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(7,'Orco',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(8,'No muerto',1);
