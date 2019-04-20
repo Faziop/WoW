@@ -30,7 +30,7 @@ public class Dao {
     public void agregarJugador(Jugador j) throws Exception {
         String sql = "insert into Jugador (nombre, genero, color_de_piel, nivel, raza, clase, faccion, ubicacion, conectado)"
                 + "values ('%s', '%s', '%s', %d, %d, %d, %d, %d , true)";
-        sql = String.format(sql, j.getNombre(), j.getGenero(), j.getColor(), j.getNivel(), j.getRaza().getId(), j.getClase().getId(), j.getFaccion().getId(), 1);
+        sql = String.format(sql, j.getNombre(), j.getGenero(), j.getColor(), j.getNivel(), j.getRaza().getId(), j.getClase().getId(), j.getFaccion().getId(), j.getUbicacion().getId(), 1);
         try {
             db.connect();
             if (db.executeUpdate(sql) == 0) {

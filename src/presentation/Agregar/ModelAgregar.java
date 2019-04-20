@@ -78,5 +78,6 @@ public class ModelAgregar extends Observable {
         this.jugador.setClase(clase);
         this.jugador.setFaccion(faccion);
         this.jugador.setRaza(raza);
+        this.jugador.setUbicacion(sitio);
     }
 }

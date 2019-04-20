@@ -256,6 +256,14 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
             this.model.getRaza().setId(jcb_raza.getSelectedIndex() + 1);
             this.model.getRaza().setNombre(jcb_raza.getSelectedItem() + "");
 
+            if (this.jcb_raza.getSelectedIndex() >= 6 && this.jcb_raza.getSelectedIndex() <= 11) {
+                this.model.getSitio().setId(2);
+            } else if (this.jcb_raza.getSelectedIndex() >= 0 && this.jcb_raza.getSelectedIndex() <= 5){
+                this.model.getSitio().setId(1);
+            } else{
+                this.model.getSitio().setId(3);
+            }
+
             this.controller.agregar();
             this.limpiar();
             JOptionPane.showMessageDialog(null, "Se agregó correctamente", "Info", JOptionPane.INFORMATION_MESSAGE);
