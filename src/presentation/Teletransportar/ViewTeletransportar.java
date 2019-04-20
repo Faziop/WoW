@@ -215,12 +215,12 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
                                 contRut += 200;
                                 break;
                             case 4:
-                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() - im.getHeight() + contMuro) / 4, 100, 100, null);
-                                contMuro += 200;
+                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), im.getHeight() - ((im.getHeight() + contMuro) / 4), 100, 100, null);
+                                contMuro += 300;
                                 break;
                             case 5:
-                                g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() - im.getHeight() + contMando) / 2, 100, 100, null);
-                                contMando += 200;
+                                g2.drawImage(im2, (im.getWidth()) / 8, im.getHeight() - ((im.getHeight() + contMando) / 4), 100, 100, null);
+                                contMando += 300;
                                 break;
                             case 6:
                                 g2.drawImage(im2, (im.getWidth() + 500) / 2, (im.getHeight() - (im.getHeight() - contGally) / 4), 100, 100, null);
