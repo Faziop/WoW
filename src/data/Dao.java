@@ -30,9 +30,11 @@ public class Dao {
     }
 
     public void agregarJugador(Jugador j) throws Exception {
+        
         String sql = "insert into Jugador (nombre, genero, color_de_piel, nivel, raza, clase, faccion, ubicacion)"
                 + "values ('%s', '%s', '%s', %d, %d, %d, %d, %d)";
         sql = String.format(sql, j.getNombre(), j.getGenero(), j.getColor(), j.getNivel(), j.getRaza().getId(), j.getClase().getId(), j.getFaccion().getId(), 1);
+        
         try {
             db.connect();
             if (db.executeUpdate(sql) == 0) {
@@ -41,6 +43,25 @@ public class Dao {
 
         } finally {
             db.disconnect();
+        }
+        
+        ArrayList<Atributo> atributos = listaAtributosClase(j.getClase().getId()); 
+        
+        for (Atributo atributo : atributos){
+            
+            sql = "insert into AtributoJugador (valor, atributo, clase, jugador) values (%d, %d, %d, '%s')";
+            sql = String.format(sql, atributo.getValor(), atributo.getIdentificador(), j.getClase(), j.getNombre());
+            
+            try {
+                db.connect();
+                if (db.executeUpdate(sql) == 0) {
+                    throw new Exception("Atributo ya existe");
+                }
+
+            } finally {
+                db.disconnect();
+            }
+        
         }
     }
 
@@ -66,6 +87,17 @@ public class Dao {
         }
     }
 
+    public Atributo getAtributo(int numero) throws Exception {
+        String sql = String.format("select atributo.identificador, atributo.nombre, atributo.valor from Atributo where identificador = %d", numero);
+
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return getObjetoAtributo(rs);
+        } else {
+            throw new Exception();
+        }
+    }
+    
     private Continente getObjetoContinente(ResultSet rs) throws Exception {
         try {
             Continente continente = new Continente();
@@ -200,6 +232,37 @@ public class Dao {
         }
 
         return jugadores;
+    }
+    
+    public ArrayList<Atributo> listaAtributosClase(int numero) throws Exception {
+        String sql = String.format("select ClaseAtributo.atributo, ClaseAtributo.valor_inicial from ClaseAtributo where clase = %d", numero);
+        ArrayList<Atributo> atributos = new ArrayList<>();
+        ArrayList<Integer> identificadorAtributos = new ArrayList<>();
+        ArrayList<Integer> valoresAtributos = new ArrayList<>();
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+
+            while (rs.next()) {
+                identificadorAtributos.add(rs.getInt("atributo"));
+                valoresAtributos.add(rs.getInt("valor_inicial"));
+            }
+        } finally {
+            db.disconnect();
+        }
+
+        try{
+            
+            for(int i = 0; i < identificadorAtributos.size(); i++){
+                Atributo atributo = getAtributo(identificadorAtributos.get(i));
+                atributo.setValor(valoresAtributos.get(i));
+                atributos.add(atributo);   
+            }
+              
+        } catch(Exception e){}
+        
+        
+        return atributos;
     }
 
     public void updateUbicacion(String nombre, Integer ubicacion) throws SQLException, Exception {
