@@ -47,6 +47,23 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
         }
     }
 
+    public void validarRaza() throws Exception {
+        this.jl_raza.setForeground(Color.getColor("[0, 0, 0]"));
+        this.jl_faccion.setForeground(Color.getColor("[0, 0, 0]"));
+
+        if (this.jcb_raza.getSelectedIndex() >= 0 && this.jcb_raza.getSelectedIndex() <= 5 && this.jcb_faccion.getSelectedIndex() != 0) {
+            this.jl_raza.setForeground(Color.red);
+            this.jl_faccion.setForeground(Color.red);
+            throw new Exception("Raza no pertenece a la facción");
+        }
+
+        if (this.jcb_raza.getSelectedIndex() >= 6 && this.jcb_raza.getSelectedIndex() <= 11 && this.jcb_faccion.getSelectedIndex() != 1) {
+            this.jl_raza.setForeground(Color.red);
+            this.jl_faccion.setForeground(Color.red);
+            throw new Exception("Raza no pertenece a la facción");
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -102,6 +119,7 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
 
         jcb_clase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Guerrero", "Paladin", "Cazador", "Ladron", "Sacerdote", "Chaman", "Mago", "Brujo", "Monge", "Druida" }));
 
+        jb_aceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/aceptar.png"))); // NOI18N
         jb_aceptar.setText("Aceptar");
         jb_aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,14 +228,15 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
         this.jb_raza.setIcon(new ImageIcon(getClass().getResource("/images/" + this.jcb_raza.getSelectedItem() + ".jpg")));
     }//GEN-LAST:event_jcb_razaActionPerformed
 
-    public void limpiar(){
+    public void limpiar() {
         this.jtf_nombre.setText("");
         this.jbg_genero.clearSelection();
     }
-    
+
     private void jb_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_aceptarActionPerformed
         try {
             this.isValido();
+            this.validarRaza();
             this.model.getJugador().setNombre(this.jtf_nombre.getText());
             this.model.getJugador().setColor(this.jcb_color.getSelectedItem() + "");
             this.model.getJugador().setConectado(true);
@@ -236,6 +255,14 @@ public class ViewAgregar extends javax.swing.JFrame implements Observer {
 
             this.model.getRaza().setId(jcb_raza.getSelectedIndex() + 1);
             this.model.getRaza().setNombre(jcb_raza.getSelectedItem() + "");
+
+            if (this.jcb_raza.getSelectedIndex() >= 6 && this.jcb_raza.getSelectedIndex() <= 11) {
+                this.model.getSitio().setId(2);
+            } else if (this.jcb_raza.getSelectedIndex() >= 0 && this.jcb_raza.getSelectedIndex() <= 5){
+                this.model.getSitio().setId(1);
+            } else{
+                this.model.getSitio().setId(3);
+            }
 
             this.controller.agregar();
             this.limpiar();

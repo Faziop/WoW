@@ -23,6 +23,16 @@ public class ViewLocalizar extends javax.swing.JFrame implements Observer {
         this.setLocationRelativeTo(null);
         this.repaint();
     }
+    
+    @Override
+    public void setVisible(boolean b) {
+        try {
+            super.setVisible(b);
+            this.controller.listaJugadores();
+        } catch (Exception ex) {
+            
+        }
+    }
 
     public void setModel(ModelLocalizar model) {
         this.model = model;
@@ -82,21 +92,20 @@ public class ViewLocalizar extends javax.swing.JFrame implements Observer {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
-                        .addGap(0, 1221, Short.MAX_VALUE)))
+                        .addGap(0, 1057, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton3)
-                        .addComponent(jButton1))
-                    .addComponent(jButton2))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addContainerGap())
         );
 
         pack();
@@ -157,26 +166,34 @@ public class ViewLocalizar extends javax.swing.JFrame implements Observer {
         int cont = 100;
         
         try{
-            File file = new File("src\\images\\"+ String.valueOf(cont == 100 ? "Mapa" : "player")+".jpg");
+            File file = new File("src\\images\\Mapa.jpg");
             BufferedImage im = ImageIO.read(file);
             File file2 = new File("src\\images\\" + this.model.getJugador().getRaza().getNombre() + ".jpg");
             BufferedImage im2 = ImageIO.read(file2);
             Graphics2D g2 = im.createGraphics();
                     
             switch (this.model.getJugador().getUbicacion().getId()) {
-                case 2:
-                    g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
-                    break;
                 case 1:
                     g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + cont) / 4, 100, 100, null);
                     break;
-                default:
-                    g2.drawImage(im2, (im.getWidth()) / 2, (im.getHeight() - (im.getHeight() + cont) / 4), 100, 100, null);
+                case 2:
+                    g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
+                    break;
+                case 3:
+                    g2.drawImage(im2, (im.getWidth() - 400) / 2, (im.getHeight() - (im.getHeight() - cont) / 4), 100, 100, null);
+                    break;
+                case 4:
+                    g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), im.getHeight() - ((im.getHeight() + cont) / 4), 100, 100, null);
+                    break;
+                case 5:
+                    g2.drawImage(im2, (im.getWidth()) / 8, im.getHeight() - ((im.getHeight() + cont) / 4), 100, 100, null);
+                    break;
+                case 6:
+                    g2.drawImage(im2, (im.getWidth() + 500) / 2, (im.getHeight() - (im.getHeight() - cont) / 4), 100, 100, null);
                     break;
             }
 
             ImageIO.write(im, "jpg", new File("src\\images\\player.jpg"));
-            cont += 200;
             
         }catch(Exception e) {}
 

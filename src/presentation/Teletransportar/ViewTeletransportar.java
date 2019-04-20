@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -25,6 +26,16 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         this.repaint();
     }
 
+    @Override
+    public void setVisible(boolean b) {
+        try {
+            super.setVisible(b);
+            this.controller.listaJugadores();
+        } catch (Exception ex) {
+            
+        }
+    }
+    
     public void setModel(ModelTeletransportar model) {
         this.model = model;
     }
@@ -45,6 +56,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
         jButton4 = new javax.swing.JButton();
 
         setTitle("Mapa");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         jScrollPane1.setViewportView(jLabel1);
@@ -84,32 +96,29 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(3, 3, 3)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addGap(0, 1138, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(3, 3, 3)
+                        .addComponent(jButton3)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4))
-                        .addComponent(jButton1))
-                    .addComponent(jButton2))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(6, 6, 6))
         );
 
         pack();
@@ -140,9 +149,7 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
            ImageIcon icon = new ImageIcon(ZoomImage(w+1000, h+1000, img));
            jLabel1.setIcon(icon);
        }
-       catch(Exception e){
-           
-       }
+       catch(Exception e){}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -157,7 +164,8 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        controller.viewJugadores.setVisible(true);
+        if(model.getJugadores() != null)
+            controller.viewJugadores.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private Image ZoomImage(int w, int h, Image img){
@@ -171,38 +179,73 @@ public class ViewTeletransportar extends javax.swing.JFrame implements Observer 
     
     public void paint(Graphics g){
 
-        int cont = 100;
+        if(model.getJugadores() != null){
         
-        for(Jugador jugador : model.getJugadores()){
+            int contVertor = 100;
+            int contVerde = 100;
+            int contRut = 100;
+            int contMuro = 100;
+            int contMando = 100;
+            int contGally = 100;
             
-            if(jugador.isConectado()){
+            boolean flag = true;
 
-                try{
-                    File file = new File("src\\images\\"+ String.valueOf(cont == 100 ? "Mapa" : "output")+".jpg");
-                    BufferedImage im = ImageIO.read(file);
-                    File file2 = new File("src\\images\\" + jugador.getRaza().getNombre() + ".jpg");
-                    BufferedImage im2 = ImageIO.read(file2);
-                    Graphics2D g2 = im.createGraphics();
+            for(Jugador jugador : model.getJugadores()){
+
+                if(jugador.isConectado()){
+
+                    try{
+                        File file = new File("src\\images\\"+ String.valueOf(flag == true ? "Mapa" : "output")+".jpg");
+                        BufferedImage im = ImageIO.read(file);
+                        File file2 = new File("src\\images\\" + jugador.getRaza().getNombre() + ".jpg");
+                        BufferedImage im2 = ImageIO.read(file2);
+                        Graphics2D g2 = im.createGraphics();
+
+                        switch (jugador.getUbicacion().getId()) {
+                            case 1:
+                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + contVertor) / 4, 100, 100, null);
+                                contVertor += 200;
+                                break;
+                            case 2:
+                                g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + contVerde) / 2, 100, 100, null);
+                                contVerde += 200;
+                                break;
+                            case 3:
+                                g2.drawImage(im2, (im.getWidth() - 400) / 2, (im.getHeight() - (im.getHeight() - contRut) / 4), 100, 100, null);
+                                contRut += 200;
+                                break;
+                            case 4:
+                                g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), im.getHeight() - ((im.getHeight() + contMuro) / 4), 100, 100, null);
+                                contMuro += 300;
+                                break;
+                            case 5:
+                                g2.drawImage(im2, (im.getWidth()) / 8, im.getHeight() - ((im.getHeight() + contMando) / 4), 100, 100, null);
+                                contMando += 300;
+                                break;
+                            case 6:
+                                g2.drawImage(im2, (im.getWidth() + 500) / 2, (im.getHeight() - (im.getHeight() - contGally) / 4), 100, 100, null);
+                                contGally -= 200;
+                                break;
+                        }
+
+
+                        ImageIO.write(im, "jpg", new File("src\\images\\output.jpg"));
+                        
+                    }catch(Exception e) {}
                     
-                    switch (jugador.getUbicacion().getId()) {
-                        case 2:
-                            g2.drawImage(im2, (im.getWidth()) / 8, (im.getHeight() + cont) / 2, 100, 100, null);
-                            break;
-                        case 1:
-                            g2.drawImage(im2, (im.getWidth() - im.getWidth() / 6), (im.getHeight() + cont) / 4, 100, 100, null);
-                            break;
-                        default:
-                            g2.drawImage(im2, (im.getWidth()) / 2, (im.getHeight() - (im.getHeight() + cont) / 4), 100, 100, null);
-                            break;
-                    }
-
-
-                    ImageIO.write(im, "jpg", new File("src\\images\\output.jpg"));
-                    cont += 200;
-                }catch(Exception e) {}
+                    flag = false;
+                    
+                }
             }
         }
-       
+        else {
+            try {
+                File file = new File("src\\images\\Mapa.jpg");
+                BufferedImage im = ImageIO.read(file);
+                ImageIO.write(im, "jpg", new File("src\\images\\output.jpg"));
+            } catch (IOException ex) {}
+            
+        }
         
         try {
             

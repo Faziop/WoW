@@ -7,6 +7,8 @@ import presentation.Agregar.ViewAgregar;
 import presentation.Borrar.ControllerBorrar;
 import presentation.Borrar.ModelBorrar;
 import presentation.Borrar.ViewBorrar;
+import presentation.Listar.ControllerListar;
+import presentation.Listar.ModelListar;
 import presentation.Equipar.ControllerEquipar;
 import presentation.Equipar.ModelEquipar;
 import presentation.Equipar.ViewEquipar;
@@ -31,6 +33,7 @@ public class Application {
     public static ControllerEquipar CONTROLLER_EQUIPAR;
     public static ControllerTeletransportar CONTROLLER_TELETRANSPORTAR;
     public static ControllerLocalizar CONTROLLER_LOCALIZAR;
+    public static ControllerListar CONTROLLER_LISTAR;
 
     
     public static void main(String[] args) {
@@ -64,9 +67,14 @@ public class Application {
         CONTROLLER_TELETRANSPORTAR = ct;
         
         ModelLocalizar ml = new ModelLocalizar();
-        ViewJugadores vl = new ViewJugadores();
+        presentation.Localizar.ViewJugadores vl = new presentation.Localizar.ViewJugadores();
         ControllerLocalizar cl = new ControllerLocalizar(ml, vl);        
         CONTROLLER_LOCALIZAR = cl;
+        
+        ModelListar mlis = new ModelListar();
+        presentation.Listar.ViewJugadores vlis = new presentation.Listar.ViewJugadores();
+        ControllerListar clis = new ControllerListar(mlis, vlis);        
+        CONTROLLER_LISTAR = clis;
         
         vm.setVisible(true);
     }

@@ -48,6 +48,6 @@ public class ControllerBorrar {
     }
     
     public void borrar(String nombre) throws Exception {
-        
+        logic.Model.instance().getDb().deleteJugador(nombre);
     }
 }
