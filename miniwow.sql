@@ -82,10 +82,16 @@ CREATE TABLE Objeto(
     nombre TEXT,
     tipo TEXT,
     nivel_requerido INT,
-    equipado TEXT,
+    equipado boolean,
     jugador TEXT,
     CONSTRAINT pkObjeto PRIMARY KEY(identificador),
     CONSTRAINT fk1Objeto FOREIGN KEY(jugador) REFERENCES Jugador(nombre)
+);
+
+CREATE TABLE Encantamiento(
+    identificador INT,
+    nombre TEXT,
+    CONSTRAINT pkEncantamiento PRIMARY KEY(identificador)
 );
 
 -- Tablas JOIN
@@ -143,8 +149,16 @@ CREATE TABLE AtributoJugador(
     jugador TEXT,
     CONSTRAINT pkAtributoJugador PRIMARY KEY(atributo, clase, jugador),
     CONSTRAINT fk1AtributoJugador FOREIGN KEY(atributo, clase) REFERENCES ClaseAtributo(atributo, clase),
-    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)	
-	--CONSTRAINT ch1AtributoJugador CHECK()
+    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)
+);
+
+CREATE TABLE EncantamientoJugador(
+    valor INT,
+    encantamiento INT,
+    jugador TEXT,
+    CONSTRAINT pkEncantamientoJugador PRIMARY KEY(encantamiento, jugador),
+    CONSTRAINT fk1EncantamientoJugador FOREIGN KEY(encantamiento) REFERENCES Encantamiento(identificador),
+    CONSTRAINT fk2EncantamientoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)
 );
 
 CREATE TABLE AtributoObjeto(
@@ -155,6 +169,15 @@ CREATE TABLE AtributoObjeto(
 	objeto INT,
     CONSTRAINT fk1AtributoObjeto FOREIGN KEY(atributo, clase, jugador) REFERENCES AtributoJugador(atributo, clase, jugador),
     CONSTRAINT fk2AtributoObjeto FOREIGN KEY(objeto) REFERENCES Objeto(identificador)
+);
+
+CREATE TABLE EncantamientoObjeto(
+    valor_modificador INT,
+    encantamiento INT,
+    jugador TEXT, 
+    objeto INT,
+    CONSTRAINT fk1EncantamientoObjeto FOREIGN KEY(encantamiento, jugador) REFERENCES EncantamientoJugador(encantamiento, jugador),
+    CONSTRAINT fk2EncantamientoObjeto FOREIGN KEY(objeto) REFERENCES Objeto(identificador)
 );
 
 -- Datos pre-establecidos
@@ -183,13 +206,9 @@ INSERT INTO Atributo(identificador,nombre) VALUES(3,'Mana');
 INSERT INTO Atributo(identificador,nombre) VALUES(4,'Agilidad');
 INSERT INTO Atributo(identificador,nombre) VALUES(5,'Armamento');
 
--- FALTA AGREGAR MAS SITIOS, CON SUS RESPECTIVAS VILLAS Y ALDEAS
-
----Estos sitios son para poder realizar el teletransporte basándolo sólo en continentes
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(1,'Azerot', 'Continente', NULL);
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(2,'Kalindor', 'Continente', NULL);
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(3,'Pandarian', 'Continente', NULL);
---
 
 INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(4,'Vertormenta', 'Villa', NULL); 
 
@@ -209,6 +228,11 @@ INSERT INTO Raza(identificador,nombre,region) VALUES(10,'Trol',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(11,'Elfo de sangre',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(12,'Goblin',1);
 INSERT INTO Raza(identificador,nombre,region) VALUES(13,'Panda',1);
+
+INSERT INTO Encantamiento(identificador,nombre) VALUES(1,'Golpe critico');
+INSERT INTO Encantamiento(identificador,nombre) VALUES(2,'Hipnosis');
+INSERT INTO Encantamiento(identificador,nombre) VALUES(3,'Suerte');
+INSERT INTO Encantamiento(identificador,nombre) VALUES(4,'Veneno');
 
 INSERT INTO RazaFaccion(raza,faccion) VALUES(1,1);
 INSERT INTO RazaFaccion(raza,faccion) VALUES(2,1);
@@ -388,7 +412,9 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Erick", 0, 1, 1, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Fazio", 0, 2, 2, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Alonso", 0, 3, 3, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES("Gonzalo", 0, 4, 4, 1, 1, false);
+-- Agregar
+
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Cosi', 0);

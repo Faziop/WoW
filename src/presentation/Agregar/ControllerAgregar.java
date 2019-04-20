@@ -1,11 +1,5 @@
 package presentation.Agregar;
 
-import java.sql.SQLException;
-import wow.Application;
-
-/*
- * @author alefa
- */
 public class ControllerAgregar {
 
     private ModelAgregar model;

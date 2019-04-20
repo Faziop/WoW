@@ -7,10 +7,12 @@ import presentation.Agregar.ViewAgregar;
 import presentation.Borrar.ControllerBorrar;
 import presentation.Borrar.ModelBorrar;
 import presentation.Borrar.ViewBorrar;
+import presentation.Equipar.ControllerEquipar;
+import presentation.Equipar.ModelEquipar;
+import presentation.Equipar.ViewEquipar;
 import presentation.Localizar.ControllerLocalizar;
 import presentation.Localizar.ModelLocalizar;
 import presentation.Localizar.ViewJugadores;
-import presentation.Localizar.ViewLocalizar;
 import presentation.Teletransportar.ControllerTeletransportar;
 import presentation.Teletransportar.ModelTeletransportar;
 import presentation.Teletransportar.ViewTeletransportar;
@@ -26,6 +28,7 @@ public class Application {
     public static ControllerMenu CONTROLLER_MENU;
     public static ControllerAgregar CONTROLLER_AGREGAR;
     public static ControllerBorrar CONTROLLER_BORRAR;
+    public static ControllerEquipar CONTROLLER_EQUIPAR;
     public static ControllerTeletransportar CONTROLLER_TELETRANSPORTAR;
     public static ControllerLocalizar CONTROLLER_LOCALIZAR;
 
@@ -48,6 +51,12 @@ public class Application {
         ViewBorrar vb = new ViewBorrar();
         ControllerBorrar cb = new ControllerBorrar(mb, vb);        
         CONTROLLER_BORRAR = cb;
+        
+        
+        ModelEquipar me = new ModelEquipar();
+        ViewEquipar ve = new ViewEquipar();
+        ControllerEquipar ce = new ControllerEquipar(me, ve);        
+        CONTROLLER_EQUIPAR = ce;
         
         ModelTeletransportar mt = new ModelTeletransportar();
         ViewTeletransportar vt = new ViewTeletransportar();

@@ -48,6 +48,11 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
         });
 
         jb_equipar.setText("Equipar");
+        jb_equipar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_equiparActionPerformed(evt);
+            }
+        });
 
         jb_listado.setText("Listado de jugadores");
 
@@ -138,6 +143,10 @@ public class ViewMenu extends javax.swing.JFrame implements Observer {
     private void jb_localizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_localizarActionPerformed
         this.controller.menu("Localizar");
     }//GEN-LAST:event_jb_localizarActionPerformed
+
+    private void jb_equiparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_equiparActionPerformed
+        this.controller.menu("Equipar");
+    }//GEN-LAST:event_jb_equiparActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jb_agregar;

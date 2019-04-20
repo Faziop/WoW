@@ -8,18 +8,19 @@ package data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
+import logic.Atributo;
 import logic.Clase;
 import logic.Continente;
+import logic.Encantamiento;
 import logic.Faccion;
 import logic.Jugador;
+import logic.Objeto;
 import logic.Raza;
 import logic.Region;
 import logic.Sitio;
-import wow.Application;
 
-/*
- * @author alefa
- */
 public class Dao {
 
     private RelDatabase db;
@@ -29,9 +30,11 @@ public class Dao {
     }
 
     public void agregarJugador(Jugador j) throws Exception {
+        
         String sql = "insert into Jugador (nombre, genero, color_de_piel, nivel, raza, clase, faccion, ubicacion)"
                 + "values ('%s', '%s', '%s', %d, %d, %d, %d, %d)";
         sql = String.format(sql, j.getNombre(), j.getGenero(), j.getColor(), j.getNivel(), j.getRaza().getId(), j.getClase().getId(), j.getFaccion().getId(), 1);
+        
         try {
             db.connect();
             if (db.executeUpdate(sql) == 0) {
@@ -41,8 +44,27 @@ public class Dao {
         } finally {
             db.disconnect();
         }
+        
+        ArrayList<Atributo> atributos = listaAtributosClase(j.getClase().getId()); 
+        
+        for (Atributo atributo : atributos){
+            
+            sql = "insert into AtributoJugador (valor, atributo, clase, jugador) values (%d, %d, %d, '%s')";
+            sql = String.format(sql, atributo.getValor(), atributo.getIdentificador(), j.getClase(), j.getNombre());
+            
+            try {
+                db.connect();
+                if (db.executeUpdate(sql) == 0) {
+                    throw new Exception("Atributo ya existe");
+                }
+
+            } finally {
+                db.disconnect();
+            }
+        
+        }
     }
-    
+
     private Sitio getObjetoSitio(ResultSet rs) throws Exception {
         try {
             Sitio sitio = new Sitio();
@@ -53,13 +75,24 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Sitio getSitio(int numero) throws Exception {
         String sql = String.format("select sitio.identificador, sitio.nombre from Sitio where identificador = %d", numero);
 
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
             return getObjetoSitio(rs);
+        } else {
+            throw new Exception();
+        }
+    }
+
+    public Atributo getAtributo(int numero) throws Exception {
+        String sql = String.format("select atributo.identificador, atributo.nombre, atributo.valor from Atributo where identificador = %d", numero);
+
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return getObjetoAtributo(rs);
         } else {
             throw new Exception();
         }
@@ -75,7 +108,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Continente getContinente(int numero) throws Exception {
         String sql = String.format("select continente.identificador, continente.nombre from Continente where identificador = %d", numero);
 
@@ -86,7 +119,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     private Region getObjetoRegion(ResultSet rs) throws Exception {
         try {
             Region region = new Region();
@@ -98,7 +131,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Region getRegion(int numero) throws Exception {
         String sql = String.format("select region.identificador, region.nombre, region.continente from Region where identificador = %d", numero);
 
@@ -109,7 +142,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     private Raza getObjetoRaza(ResultSet rs) throws Exception {
         try {
             Raza raza = new Raza();
@@ -121,7 +154,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Raza getRaza(int numero) throws Exception {
         String sql = String.format("select raza.identificador, raza.nombre, raza.region from Raza where identificador = %d", numero);
 
@@ -143,7 +176,7 @@ public class Dao {
             return null;
         }
     }
-    
+
     public Clase getClase(int numero) throws Exception {
         String sql = String.format("select clase.identificador, clase.nombre from Clase where identificador = %d", numero);
 
@@ -154,7 +187,7 @@ public class Dao {
             throw new Exception();
         }
     }
-    
+
     public ArrayList<Jugador> listaJugadores() throws Exception {
         String sql = "select jugador.nombre, jugador.genero, jugador.color_de_piel, jugador.nivel, jugador.raza, jugador.clase, jugador.faccion, jugador.ubicacion, clase.id, clase.nombre, raza.nombre, faccion.nombre, sitio.nombre from Jugador, Clase, Raza, Faccion, Sitio where Jugador.raza = Raza.id and Jugador.clase = Clase.id and Jugador.faccion = Faccion.id";
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -176,7 +209,7 @@ public class Dao {
 
         return jugadores;
     }
-    
+
     public ArrayList<Jugador> listaJugadoresTele() throws Exception {
         String sql = "select jugador.nombre, jugador.raza, jugador.clase, jugador.ubicacion, jugador.conectado from Jugador where jugador.conectado = true";
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -199,6 +232,37 @@ public class Dao {
         }
 
         return jugadores;
+    }
+    
+    public ArrayList<Atributo> listaAtributosClase(int numero) throws Exception {
+        String sql = String.format("select ClaseAtributo.atributo, ClaseAtributo.valor_inicial from ClaseAtributo where clase = %d", numero);
+        ArrayList<Atributo> atributos = new ArrayList<>();
+        ArrayList<Integer> identificadorAtributos = new ArrayList<>();
+        ArrayList<Integer> valoresAtributos = new ArrayList<>();
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+
+            while (rs.next()) {
+                identificadorAtributos.add(rs.getInt("atributo"));
+                valoresAtributos.add(rs.getInt("valor_inicial"));
+            }
+        } finally {
+            db.disconnect();
+        }
+
+        try{
+            
+            for(int i = 0; i < identificadorAtributos.size(); i++){
+                Atributo atributo = getAtributo(identificadorAtributos.get(i));
+                atributo.setValor(valoresAtributos.get(i));
+                atributos.add(atributo);   
+            }
+              
+        } catch(Exception e){}
+        
+        
+        return atributos;
     }
 
     public void updateUbicacion(String nombre, Integer ubicacion) throws SQLException, Exception {
@@ -230,5 +294,304 @@ public class Dao {
         }
 
         return jugador;
+    }
+
+    public Jugador getJugador1(String nombre) throws SQLException, Exception {
+        String sql = String.format("select * from Jugador where nombre = '%s'", nombre);
+        Jugador jugador = new Jugador();
+
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+
+            jugador.setNombre(rs.getString("nombre"));
+            jugador.setGenero(rs.getString("genero"));
+            jugador.setColor(rs.getString("color_de_piel"));
+            jugador.setNivel(rs.getInt("nivel"));
+            jugador.setClase(this.getClase(rs.getInt("clase")));
+            jugador.setRaza(this.getRaza(rs.getInt("raza")));
+            jugador.setFaccion(this.getFaccion(rs.getInt("faccion")));
+//            TODO
+            jugador.setUbicacion(this.getSitio(rs.getInt("ubicacion")));
+            jugador.setConectado(Boolean.valueOf(rs.getString("conectado")));
+        } finally {
+            db.disconnect();
+        }
+
+        return jugador;
+    }
+
+    private Faccion getObjetoFaccion(ResultSet rs) throws Exception {
+        try {
+            Faccion faccion = new Faccion();
+            faccion.setId(rs.getInt("identificador"));
+            faccion.setNombre(rs.getString("nombre"));
+            return faccion;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public Faccion getFaccion(int numero) throws Exception {
+        String sql = String.format("select * from Faccion where identificador = %d", numero);
+
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return getObjetoFaccion(rs);
+        } else {
+            throw new Exception();
+        }
+    }
+
+//    private Sitio getUbicacionDeJugador(int aInt) {
+////        TODO
+//    }
+    private Atributo getObjetoAtributo(ResultSet rs) {
+        try {
+            Atributo atributo = new Atributo();
+            atributo.setIdentificador(rs.getInt("identificador"));
+            atributo.setNombre(rs.getString("nombre"));
+            atributo.setValor(rs.getInt("valor"));
+            return atributo;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public HashMap<String, Atributo> getAtributosDeJugador(String nombre) {
+        String sql = String.format("select Atributo.identificador, Atributo.nombre, AtributoJugador.valor from Atributo, AtributoJugador where AtributoJugador.atributo = Atributo.identificador AND AtributoJugador.jugador = '%s'", nombre);
+
+        HashMap<String, Atributo> atributos = new HashMap<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    System.out.println(rs.getString("nombre"));
+                    atributos.put(rs.getString("nombre"), this.getObjetoAtributo(rs));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return atributos;
+    }
+
+    public HashMap<String, Encantamiento> getEncantamientosDeJugador(String nombre) {
+        String sql = String.format("select Encantamiento.identificador, Encantamiento.nombre, EncantamientoJugador.valor from Encantamiento, EncantamientoJugador where EncantamientoJugador.encantamiento = Encantamiento.identificador AND EncantamientoJugador.jugador = '%s'", nombre);
+
+        HashMap<String, Encantamiento> encantamientos = new HashMap<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    encantamientos.put(rs.getString("nombre"), this.getObjetoEncantamiento(rs));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return encantamientos;
+    }
+
+    private Objeto getObjetoObjeto(ResultSet rs) {
+        try {
+            Objeto objeto = new Objeto();
+            objeto.setId(rs.getInt("identificador"));
+            objeto.setNombre(rs.getString("nombre"));
+            objeto.setTipo(rs.getString("tipo"));
+            objeto.setNivel(rs.getInt("nivel_requerido"));
+            objeto.setEquipado(rs.getBoolean("equipado"));
+            objeto.setJugador(this.getJugador1(rs.getString("jugador")));
+            return objeto;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public ArrayList<Objeto> getObjetosDeJugador(String nombre, int equipado) {
+        String sql = String.format("SELECT * FROM Objeto WHERE jugador = '%s' AND equipado = %d", nombre, equipado);
+
+        ArrayList<Objeto> objetos = new ArrayList<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    objetos.add(this.getObjetoObjeto(rs));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return objetos;
+    }
+
+    public ArrayList<Atributo> getAtributosDeJugadorModificadosPorObjeto(int identificador, String nombre) {
+        String sql = String.format("SELECT Atributo.identificador, Atributo.nombre, AtributoObjeto.valor_modificador as valor FROM Atributo, AtributoObjeto, Jugador, Objeto WHERE Atributo.identificador = AtributoObjeto.atributo AND Objeto.identificador = AtributoObjeto.objeto AND Jugador.nombre = AtributoObjeto.jugador AND Jugador.nombre = '%s' AND Objeto.identificador = %d", nombre, identificador);
+
+        ArrayList<Atributo> atributos = new ArrayList<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    atributos.add(this.getObjetoAtributo(rs));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return atributos;
+    }
+
+    private Encantamiento getObjetoEncantamiento(ResultSet rs) {
+        try {
+            Encantamiento encantamiento = new Encantamiento();
+            encantamiento.setIdentificador(rs.getInt("identificador"));
+            encantamiento.setNombre(rs.getString("nombre"));
+            encantamiento.setValor(rs.getInt("valor"));
+            return encantamiento;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public ArrayList<Encantamiento> getEncantamientosDeJugadorModificadosPorObjeto(int identificador, String nombre) {
+        String sql = String.format("SELECT Encantamiento.identificador, Encantamiento.nombre, EncantamientoObjeto.valor_modificador as valor FROM Encantamiento, EncantamientoObjeto, Jugador, Objeto WHERE Encantamiento.identificador = EncantamientoObjeto.encantamiento AND Objeto.identificador = EncantamientoObjeto.objeto AND Jugador.nombre = EncantamientoObjeto.jugador AND Jugador.nombre = '%s' AND Objeto.identificador = %d", nombre, identificador);
+
+        ArrayList<Encantamiento> encantamientos = new ArrayList<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    encantamientos.add(this.getObjetoEncantamiento(rs));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return encantamientos;
+    }
+
+    public Vector<String> getJugadoresAEquipar() {
+        String sql = "SELECT Jugador.nombre FROM Jugador";
+
+        Vector<String> jugadores = new Vector<>();
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                while (rs.next()) {
+                    jugadores.add(rs.getString("nombre"));
+                }
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
+
+        return jugadores;
+    }
+
+    public void actualizarEstadoDeObjeto(int id, int clase, String jugador, ArrayList<Atributo> atributos, ArrayList<Encantamiento> encantamientos) throws Exception {
+        String sql = String.format("SELECT Objeto.equipado, Objeto.tipo from Objeto where identificador = %d", id);
+        int estadoObjeto;
+        char signoDeModificacion;
+        String tipoDeObjeto = "";
+
+        try {
+            try {
+                db.connect();
+                ResultSet rs = db.executeQuery(sql);
+
+                estadoObjeto = rs.getBoolean("equipado") == true ? 0 : 1;
+
+                tipoDeObjeto = rs.getString("tipo");
+
+                if (estadoObjeto == 1) {
+
+                    sql = String.format("SELECT Objeto.tipo from Objeto WHERE equipado = 1 AND jugador = '%s'", jugador);
+                    rs = db.executeQuery(sql);
+
+                    while (rs.next()) {
+                        if (tipoDeObjeto.equals(rs.getString("tipo"))) {
+                            throw new Exception("Ya hay un objeto tipo " + tipoDeObjeto + " equipado");
+                        }
+                    }
+                }
+
+                if (estadoObjeto == 0) {
+                    signoDeModificacion = '-';
+                } else {
+                    signoDeModificacion = '+';
+                }
+
+                sql = String.format("UPDATE Objeto SET equipado = %d WHERE Objeto.identificador = %d", estadoObjeto, id);
+
+                db.executeQuery(sql);
+
+                for (Atributo atr : atributos) {
+                    sql = String.format("UPDATE AtributoJugador SET valor = valor %c %d WHERE atributo = %d AND clase = %d AND jugador = '%s'", signoDeModificacion, atr.getValor(), atr.getIdentificador(), clase, jugador);
+
+                    db.executeQuery(sql);
+                }
+
+                for (Encantamiento enc : encantamientos) {
+                    sql = String.format("UPDATE EncantamientoJugador SET valor = valor %c %d WHERE encantamiento = %d AND jugador = '%s'", signoDeModificacion, enc.getValor(), enc.getIdentificador(), jugador);
+
+                    db.executeQuery(sql);
+                }
+
+            } catch (SQLException ex) {
+                ex.getMessage();
+            } finally {
+                db.disconnect();
+            }
+        } catch (SQLException ex) {
+            ex.getMessage();
+        }
     }
 }
