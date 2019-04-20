@@ -48,12 +48,31 @@ public class Dao {
         for (Atributo atributo : atributos){
             
             sql = "insert into AtributoJugador (valor, atributo, clase, jugador) values (%d, %d, %d, '%s')";
-            sql = String.format(sql, atributo.getValor(), atributo.getIdentificador(), j.getClase(), j.getNombre());
+            sql = String.format(sql, atributo.getValor(), atributo.getIdentificador(), j.getClase().getId(), j.getNombre());
             
             try {
                 db.connect();
                 if (db.executeUpdate(sql) == 0) {
                     throw new Exception("Atributo ya existe");
+                }
+
+            } finally {
+                db.disconnect();
+            }
+        
+        }
+        
+        ArrayList<Encantamiento> encantamientos = listaEncantamientos();
+        
+        for (Encantamiento encantamiento : encantamientos){
+            
+            sql = "insert into EncantamientoJugador (valor, encantamiento, jugador) values (%d, %d, '%s')";
+            sql = String.format(sql, encantamiento.getValor(), encantamiento.getIdentificador(), j.getNombre());
+            
+            try {
+                db.connect();
+                if (db.executeUpdate(sql) == 0) {
+                    throw new Exception("Encantamiento ya existe");
                 }
 
             } finally {
@@ -85,14 +104,30 @@ public class Dao {
         }
     }
 
+    private Atributo getObjetoAtributo2(ResultSet rs) {
+        try {
+            Atributo atributo = new Atributo();
+            atributo.setIdentificador(rs.getInt("identificador"));
+            atributo.setNombre(rs.getString("nombre"));
+            return atributo;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
     public Atributo getAtributo(int numero) throws Exception {
-        String sql = String.format("select atributo.identificador, atributo.nombre, atributo.valor from Atributo where identificador = %d", numero);
+        String sql = String.format("select atributo.identificador, atributo.nombre from Atributo where identificador = %d", numero);
 
+        try {
+            db.connect();
         ResultSet rs = db.executeQuery(sql);
         if (rs.next()) {
-            return getObjetoAtributo(rs);
+            return getObjetoAtributo2(rs);
         } else {
             throw new Exception();
+        }
+        } finally {
+            db.disconnect();
         }
     }
     
@@ -268,6 +303,27 @@ public class Dao {
         return atributos;
     }
 
+    public ArrayList<Encantamiento> listaEncantamientos() throws Exception {
+        String sql = "select Encantamiento.identificador, Encantamiento.nombre from Encantamiento";
+        ArrayList<Encantamiento> encantamientos = new ArrayList<>();
+
+        try {
+            db.connect();
+            ResultSet rs = db.executeQuery(sql);
+
+            while (rs.next()) {
+                Encantamiento encantamiento = new Encantamiento();
+                encantamiento.setIdentificador(rs.getInt("identificador"));
+                encantamiento.setNombre(rs.getString("nombre"));
+                encantamientos.add(encantamiento);
+            }
+        } finally {
+            db.disconnect();
+        }
+        
+        return encantamientos;
+    }
+    
     public void updateUbicacion(String nombre, Integer ubicacion) throws SQLException, Exception {
         String sql = String.format("update Jugador set ubicacion = %d where nombre = '%s' and conectado = true", ubicacion, nombre);
 

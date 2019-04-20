@@ -6,9 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*
- * @author alefa
- */
 public class RelDatabase {
 
     private Connection conn;
