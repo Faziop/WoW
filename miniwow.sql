@@ -82,7 +82,7 @@ CREATE TABLE Objeto(
     nombre TEXT,
     tipo TEXT,
     nivel_requerido INT,
-    equipado TEXT,
+    equipado boolean,
     jugador TEXT,
     CONSTRAINT pkObjeto PRIMARY KEY(identificador),
     CONSTRAINT fk1Objeto FOREIGN KEY(jugador) REFERENCES Jugador(nombre)

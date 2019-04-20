@@ -87,27 +87,18 @@ public class ModelEquipar {
     }
 
     public void obtenerObjetosDeJugador(String nombre) {
-        ContendedorDeObjeto contendedorDeObjeto = new ContendedorDeObjeto();
         String nombreDeJugador = jugador.getNombre();
         
         ObjetoListModel nuevoEquipamiento = new ObjetoListModel();
 
         for (Objeto obj : logic.Model.instance().getDb().getObjetosDeJugador(nombreDeJugador, 1)) {
-            contendedorDeObjeto.setObjeto(obj);
-            contendedorDeObjeto.setAtributos(logic.Model.instance().getDb().getAtributosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador));
-            contendedorDeObjeto.setEncantamientos(logic.Model.instance().getDb().getEncantamientosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador));
-
-            nuevoEquipamiento.addObjeto(contendedorDeObjeto);
+            nuevoEquipamiento.addObjeto(new ContendedorDeObjeto(obj, logic.Model.instance().getDb().getAtributosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador), logic.Model.instance().getDb().getEncantamientosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador)));
         }
         
         ObjetoListModel nuevoInventario = new ObjetoListModel();
 
         for (Objeto obj : logic.Model.instance().getDb().getObjetosDeJugador(nombreDeJugador, 0)) {
-            contendedorDeObjeto.setObjeto(obj);
-            contendedorDeObjeto.setAtributos(logic.Model.instance().getDb().getAtributosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador));
-            contendedorDeObjeto.setEncantamientos(logic.Model.instance().getDb().getEncantamientosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador));
-
-            nuevoInventario.addObjeto(contendedorDeObjeto);
+            nuevoInventario.addObjeto(new ContendedorDeObjeto(obj, logic.Model.instance().getDb().getAtributosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador), logic.Model.instance().getDb().getEncantamientosDeJugadorModificadosPorObjeto(obj.getId(), nombreDeJugador)));
         }
         
         this.setEquipamiento(nuevoEquipamiento);
@@ -116,5 +107,9 @@ public class ModelEquipar {
 
     public void obtenerJugadoresAEquipar() {
         this.setJugadores(logic.Model.instance().getDb().getJugadoresAEquipar());
+    }
+
+    public void actualizarEstadoDeObjeto(int id, ArrayList<Atributo> atributos) {
+        logic.Model.instance().getDb().actualizarEstadoDeObjeto(id, this.getJugador().getClase().getId(), this.getJugador().getNombre(), atributos);
     }
 }

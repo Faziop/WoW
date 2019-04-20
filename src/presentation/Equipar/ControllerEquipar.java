@@ -1,6 +1,7 @@
 package presentation.Equipar;
 
 import javax.swing.DefaultComboBoxModel;
+import logic.Objeto;
 
 public class ControllerEquipar {
 
@@ -16,12 +17,19 @@ public class ControllerEquipar {
 
     void agregarObjeto(int seleccion) {
         ContendedorDeObjeto objeto = this.model.getInventario().getObjeto(seleccion);
+        Objeto objetoEquipado = objeto.getObjeto();
 
 //        Verificar estado de objeto y SQL
         try {
-            this.model.getEquipamiento().addObjeto(objeto);
+            if (this.model.getJugador().getNivel() >= objetoEquipado.getNivel()) {
+                this.model.getEquipamiento().addObjeto(objeto);
 
-            this.model.getInventario().eliminarObjeto(seleccion);
+                this.model.actualizarEstadoDeObjeto(objetoEquipado.getId(), objeto.getAtributos());
+
+                this.model.getInventario().eliminarObjeto(seleccion);
+
+                this.actualizarModel();
+            }
 
             this.view.actualizar();
 
