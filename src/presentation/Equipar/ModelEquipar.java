@@ -109,7 +109,7 @@ public class ModelEquipar {
         this.setJugadores(logic.Model.instance().getDb().getJugadoresAEquipar());
     }
 
-    public void actualizarEstadoDeObjeto(int id, ArrayList<Atributo> atributos) {
-        logic.Model.instance().getDb().actualizarEstadoDeObjeto(id, this.getJugador().getClase().getId(), this.getJugador().getNombre(), atributos);
+    public void actualizarEstadoDeObjeto(int id, ArrayList<Atributo> atributos, ArrayList<Encantamiento> encantamientos) throws Exception {
+        logic.Model.instance().getDb().actualizarEstadoDeObjeto(id, this.getJugador().getClase().getId(), this.getJugador().getNombre(), atributos, encantamientos);
     }
 }

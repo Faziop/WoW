@@ -296,7 +296,7 @@ public class Dao {
     }
 
     public HashMap<String, Atributo> getAtributosDeJugador(String nombre) {
-        String sql = String.format("SELECT Atributo.identificador, Atributo.nombre, AtributoJugador.valor FROM AtributoJugador, ClaseAtributo, Atributo WHERE AtributoJugador.clase = ClaseAtributo.clase AND AtributoJugador.atributo = ClaseAtributo.atributo = Atributo.identificador AND AtributoJugador.jugador = '%s'", nombre);
+        String sql = String.format("select Atributo.identificador, Atributo.nombre, AtributoJugador.valor from Atributo, AtributoJugador where AtributoJugador.atributo = Atributo.identificador AND AtributoJugador.jugador = '%s'", nombre);
 
         HashMap<String, Atributo> atributos = new HashMap<>();
 
@@ -306,6 +306,7 @@ public class Dao {
                 ResultSet rs = db.executeQuery(sql);
 
                 while (rs.next()) {
+                    System.out.println(rs.getString("nombre"));
                     atributos.put(rs.getString("nombre"), this.getObjetoAtributo(rs));
                 }
             } catch (SQLException ex) {
@@ -321,7 +322,7 @@ public class Dao {
     }
 
     public HashMap<String, Encantamiento> getEncantamientosDeJugador(String nombre) {
-        String sql = String.format("SELECT Encantamiento.identificador, Encantamiento.nombre, EncantamientoJugador.valor FROM EncantamientoJugador, Encantamiento WHERE EncantamientoJugador.encantamiento = Encantamiento.identificador AND EncantamientoJugador.jugador = '%s';", nombre);
+        String sql = String.format("select Encantamiento.identificador, Encantamiento.nombre, EncantamientoJugador.valor from Encantamiento, EncantamientoJugador where EncantamientoJugador.encantamiento = Encantamiento.identificador AND EncantamientoJugador.jugador = '%s'", nombre);
 
         HashMap<String, Encantamiento> encantamientos = new HashMap<>();
 
@@ -386,7 +387,7 @@ public class Dao {
     }
 
     public ArrayList<Atributo> getAtributosDeJugadorModificadosPorObjeto(int identificador, String nombre) {
-        String sql = String.format("SELECT Atributo.identificador, Atributo.nombre, AtributoObjeto.valor_modificador as valor FROM AtributoObjeto, AtributoJugador, ClaseAtributo, Atributo WHERE AtributoObjeto.clase = AtributoJugador.clase = ClaseAtributo.clase AND AtributoObjeto.atributo = AtributoJugador.atributo = ClaseAtributo.atributo = Atributo.identificador AND AtributoObjeto.jugador = AtributoJugador.jugador AND AtributoJugador.jugador = '%s' AND AtributoObjeto.objeto = %d", nombre, identificador);
+        String sql = String.format("SELECT Atributo.identificador, Atributo.nombre, AtributoObjeto.valor_modificador as valor FROM Atributo, AtributoObjeto, Jugador, Objeto WHERE Atributo.identificador = AtributoObjeto.atributo AND Objeto.identificador = AtributoObjeto.objeto AND Jugador.nombre = AtributoObjeto.jugador AND Jugador.nombre = '%s' AND Objeto.identificador = %d", nombre, identificador);
 
         ArrayList<Atributo> atributos = new ArrayList<>();
 
@@ -423,7 +424,7 @@ public class Dao {
     }
 
     public ArrayList<Encantamiento> getEncantamientosDeJugadorModificadosPorObjeto(int identificador, String nombre) {
-        String sql = String.format("SELECT Encantamiento.identificador, Encantamiento.nombre, EncantamientoObjeto.valor_modificador as valor FROM EncantamientoObjeto, EncantamientoJugador, Encantamiento WHERE EncantamientoObjeto.encantamiento = EncantamientoJugador.encantamiento = Encantamiento.identificador AND EncantamientoObjeto.jugador = EncantamientoJugador.jugador AND EncantamientoJugador.jugador = '%s' AND EncantamientoObjeto.objeto = %d", nombre, identificador);
+        String sql = String.format("SELECT Encantamiento.identificador, Encantamiento.nombre, EncantamientoObjeto.valor_modificador as valor FROM Encantamiento, EncantamientoObjeto, Jugador, Objeto WHERE Encantamiento.identificador = EncantamientoObjeto.encantamiento AND Objeto.identificador = EncantamientoObjeto.objeto AND Jugador.nombre = EncantamientoObjeto.jugador AND Jugador.nombre = '%s' AND Objeto.identificador = %d", nombre, identificador);
 
         ArrayList<Encantamiento> encantamientos = new ArrayList<>();
 
@@ -472,9 +473,11 @@ public class Dao {
         return jugadores;
     }
 
-    public void actualizarEstadoDeObjeto(int id, int clase, String jugador, ArrayList<Atributo> atributos) {
-        String sql = String.format("SELECT Objeto.equipado from Objeto where identificador = %d", id);
+    public void actualizarEstadoDeObjeto(int id, int clase, String jugador, ArrayList<Atributo> atributos, ArrayList<Encantamiento> encantamientos) throws Exception {
+        String sql = String.format("SELECT Objeto.equipado, Objeto.tipo from Objeto where identificador = %d", id);
         int estadoObjeto;
+        char signoDeModificacion;
+        String tipoDeObjeto = "";
 
         try {
             try {
@@ -483,12 +486,38 @@ public class Dao {
 
                 estadoObjeto = rs.getBoolean("equipado") == true ? 0 : 1;
 
+                tipoDeObjeto = rs.getString("tipo");
+
+                if (estadoObjeto == 1) {
+
+                    sql = String.format("SELECT Objeto.tipo from Objeto WHERE equipado = 1 AND jugador = '%s'", jugador);
+                    rs = db.executeQuery(sql);
+
+                    while (rs.next()) {
+                        if (tipoDeObjeto.equals(rs.getString("tipo"))) {
+                            throw new Exception("Ya hay un objeto tipo " + tipoDeObjeto + " equipado");
+                        }
+                    }
+                }
+
+                if (estadoObjeto == 0) {
+                    signoDeModificacion = '-';
+                } else {
+                    signoDeModificacion = '+';
+                }
+
                 sql = String.format("UPDATE Objeto SET equipado = %d WHERE Objeto.identificador = %d", estadoObjeto, id);
 
                 db.executeQuery(sql);
 
                 for (Atributo atr : atributos) {
-                    sql = String.format("UPDATE AtributoJugador SET valor = valor + %d WHERE atributo = %d AND clase= %d AND jugador = '%s'", atr.getValor(), clase, atr.getIdentificador(), jugador, atr.getIdentificador(), clase, jugador);
+                    sql = String.format("UPDATE AtributoJugador SET valor = valor %c %d WHERE atributo = %d AND clase = %d AND jugador = '%s'", signoDeModificacion, atr.getValor(), atr.getIdentificador(), clase, jugador);
+
+                    db.executeQuery(sql);
+                }
+
+                for (Encantamiento enc : encantamientos) {
+                    sql = String.format("UPDATE EncantamientoJugador SET valor = valor %c %d WHERE encantamiento = %d AND jugador = '%s'", signoDeModificacion, enc.getValor(), enc.getIdentificador(), jugador);
 
                     db.executeQuery(sql);
                 }

@@ -352,45 +352,62 @@ public class ViewEquipar extends javax.swing.JFrame {
         this.listaInventario.setModel(this.model.getInventario());
         this.listaEquipamiento.setModel(this.model.getEquipamiento());
 
-        if (this.model.getAtributos().get("Intelecto") == null) {
-            this.labelIntelecto.setEnabled(false);
-            this.valorIntelecto.setEnabled(false);
+        boolean estadoDeAtributo;
+
+        if (estadoDeAtributo = this.model.getAtributos().get("Intelecto") == null) {
             this.valorIntelecto.setText("-");
         } else {
             this.valorIntelecto.setText(String.valueOf(this.model.getAtributos().get("Intelecto").getValor()));
         }
 
-        if (this.model.getAtributos().get("Estamina") == null) {
-            this.labelEstamina.setEnabled(false);
-            this.valorEstamina.setEnabled(false);
+        estadoDeAtributo = !estadoDeAtributo;
+
+        this.labelIntelecto.setEnabled(estadoDeAtributo);
+        this.valorIntelecto.setEnabled(estadoDeAtributo);
+
+        if (estadoDeAtributo = this.model.getAtributos().get("Estamina") == null) {
             this.valorEstamina.setText("-");
         } else {
             this.valorEstamina.setText(String.valueOf(this.model.getAtributos().get("Estamina").getValor()));
         }
 
-        if (this.model.getAtributos().get("Mana") == null) {
-            this.labelMana.setEnabled(false);
-            this.valorMana.setEnabled(false);
+        estadoDeAtributo = !estadoDeAtributo;
+
+        this.labelEstamina.setEnabled(estadoDeAtributo);
+        this.valorEstamina.setEnabled(estadoDeAtributo);
+
+        if (estadoDeAtributo = this.model.getAtributos().get("Mana") == null) {
             this.valorMana.setText("-");
         } else {
             this.valorMana.setText(String.valueOf(this.model.getAtributos().get("Mana").getValor()));
         }
 
-        if (this.model.getAtributos().get("Agilidad") == null) {
-            this.labelAgilidad.setEnabled(false);
-            this.valorAgilidad.setEnabled(false);
+        estadoDeAtributo = !estadoDeAtributo;
+
+        this.labelMana.setEnabled(estadoDeAtributo);
+        this.valorMana.setEnabled(estadoDeAtributo);
+
+        if (estadoDeAtributo = this.model.getAtributos().get("Agilidad") == null) {
             this.valorAgilidad.setText("-");
         } else {
             this.valorAgilidad.setText(String.valueOf(this.model.getAtributos().get("Agilidad").getValor()));
         }
 
-        if (this.model.getAtributos().get("Armamento") == null) {
-            this.labelArmamento.setEnabled(false);
-            this.valorArmamento.setEnabled(false);
+        estadoDeAtributo = !estadoDeAtributo;
+
+        this.labelAgilidad.setEnabled(estadoDeAtributo);
+        this.valorAgilidad.setEnabled(estadoDeAtributo);
+
+        if (estadoDeAtributo = this.model.getAtributos().get("Armamento") == null) {
             this.valorArmamento.setText("-");
         } else {
             this.valorArmamento.setText(String.valueOf(this.model.getAtributos().get("Armamento").getValor()));
         }
+
+        estadoDeAtributo = !estadoDeAtributo;
+
+        this.labelArmamento.setEnabled(estadoDeAtributo);
+        this.valorArmamento.setEnabled(estadoDeAtributo);
 
         if (this.model.getEncantamientos().get("Golpe critico") == null) {
             this.valorGolpeCritico.setText("0");

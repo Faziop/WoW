@@ -149,8 +149,7 @@ CREATE TABLE AtributoJugador(
     jugador TEXT,
     CONSTRAINT pkAtributoJugador PRIMARY KEY(atributo, clase, jugador),
     CONSTRAINT fk1AtributoJugador FOREIGN KEY(atributo, clase) REFERENCES ClaseAtributo(atributo, clase),
-    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)	
-	--CONSTRAINT ch1AtributoJugador CHECK()
+    CONSTRAINT fk2AtributoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)
 );
 
 CREATE TABLE EncantamientoJugador(
@@ -159,8 +158,7 @@ CREATE TABLE EncantamientoJugador(
     jugador TEXT,
     CONSTRAINT pkEncantamientoJugador PRIMARY KEY(encantamiento, jugador),
     CONSTRAINT fk1EncantamientoJugador FOREIGN KEY(encantamiento) REFERENCES Encantamiento(identificador),
-    CONSTRAINT fk2EncantamientoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)	
-	--CONSTRAINT ch1EncantamientoJugador CHECK()
+    CONSTRAINT fk2EncantamientoJugador FOREIGN KEY(jugador) REFERENCES jugador(nombre)
 );
 
 CREATE TABLE AtributoObjeto(
@@ -208,13 +206,9 @@ INSERT INTO Atributo(identificador,nombre) VALUES(3,'Mana');
 INSERT INTO Atributo(identificador,nombre) VALUES(4,'Agilidad');
 INSERT INTO Atributo(identificador,nombre) VALUES(5,'Armamento');
 
--- FALTA AGREGAR MAS SITIOS, CON SUS RESPECTIVAS VILLAS Y ALDEAS
-
----Estos sitios son para poder realizar el teletransporte basándolo sólo en continentes
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(1,'Azerot', 'Continente', NULL);
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(2,'Kalindor', 'Continente', NULL);
 INSERT INTO Sitio(identificador,nombre,tipo, region) VALUES(3,'Pandarian', 'Continente', NULL);
---
 
 INSERT INTO Sitio(identificador,nombre,tipo,region) VALUES(4,'Vertormenta', 'Villa', NULL); 
 
@@ -418,51 +412,9 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Erick', 0, 5, 1, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Fazio', 0, 2, 2, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Alonso', 0, 3, 3, 1, 1, true);
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Gonzalo', 0, 4, 4, 1, 1, false);
+-- Agregar
 
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (1, 'Espada X', 'Arma', 5, false, 'Erick');
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (2, 'Casco Z', 'Casco', 7, false, 'Gonzalo');
-
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(1, 1, 'Erick', 5);
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Erick', 0);
-
-INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(-4, 1, 1, 'Erick', 1);
-
-INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(6, 1, 'Erick', 1);
-
--- Aqui cuando se inserta el jugador se insertan los atributos predefinidos en ClaseAtributo con el valor inicial correspondiente
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES ('Cosi', 0, 3, 4, 1, 1, 0);
-
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 1, 'Cosi', 0); -- (0) SELECT ClaseAtributo.valor_inicial FROM Clase, ClaseAtributo, Atributo WHERE Clase.identificador = ClaseAtributo.clase AND ClaseAtributo.atributo = Atributo.identificador AND Clase.identificador = 4 AND Atributo.identificador = 2;
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 1, 'Cosi', 0);
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 1, 'Cosi', 0);
-
-
-
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (14, 'Espada Cosi', 'Arma', 0, false, 'Cosi');
-INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(3, 2, 1, 'Cosi', 14);
-
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (15, 'Casco Cosi', 'Casco', 0, false, 'Cosi');
-
--- IF UPDATE A EQUIPADO EN OBJETO => SE SUBE VALOR EN ATRIBUTO JUGADOR (b). SI DESEQUIPADO => SE BAJA EL VALOR (c)
-
--- (b)
-UPDATE Objeto
-SET equipado = 1
-WHERE Objeto.identificador = 14;
-
-UPDATE AtributoJugador
-SET valor = valor + (SELECT AtributoObjeto.valor_modificador FROM AtributoObjeto, AtributoJugador WHERE AtributoObjeto.clase = AtributoJugador.clase AND AtributoObjeto.atributo = AtributoJugador.atributo AND AtributoObjeto.jugador = AtributoJugador.jugador AND AtributoObjeto.clase = 1 AND AtributoObjeto.atributo = 2 AND AtributoObjeto.jugador = 'Cosi')
-WHERE atributo = 2 AND clase= 1 AND jugador = 'Cosi';
-
--- (c)
-UPDATE Objeto
-SET equipado = 0
-WHERE Objeto.identificador = 14;
-
-UPDATE AtributoJugador
-SET valor = valor - (SELECT AtributoObjeto.valor_modificador FROM AtributoObjeto, AtributoJugador WHERE AtributoObjeto.clase = AtributoJugador.clase AND AtributoObjeto.atributo = AtributoJugador.atributo AND AtributoObjeto.jugador = AtributoJugador.jugador AND AtributoObjeto.clase = 1 AND AtributoObjeto.atributo = 2 AND AtributoObjeto.jugador = 'Cosi')
-WHERE atributo = 2 AND clase= 1 AND jugador = 'Cosi';
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Cosi', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Cosi', 0);

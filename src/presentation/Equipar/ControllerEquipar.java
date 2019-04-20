@@ -1,6 +1,7 @@
 package presentation.Equipar;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import logic.Objeto;
 
 public class ControllerEquipar {
@@ -19,14 +20,38 @@ public class ControllerEquipar {
         ContendedorDeObjeto objeto = this.model.getInventario().getObjeto(seleccion);
         Objeto objetoEquipado = objeto.getObjeto();
 
-//        Verificar estado de objeto y SQL
         try {
             if (this.model.getJugador().getNivel() >= objetoEquipado.getNivel()) {
+
+                this.model.actualizarEstadoDeObjeto(objetoEquipado.getId(), objeto.getAtributos(), objeto.getEncantamientos());
                 this.model.getEquipamiento().addObjeto(objeto);
 
-                this.model.actualizarEstadoDeObjeto(objetoEquipado.getId(), objeto.getAtributos());
-
                 this.model.getInventario().eliminarObjeto(seleccion);
+
+                this.actualizarModel();
+            } else {
+                JOptionPane.showMessageDialog(null, "El nivel del personaje es menor al nivel requerido del objeto", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            this.view.actualizar();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+        }
+    }
+
+    void eliminarObjeto(int seleccion) {
+        ContendedorDeObjeto objeto = this.model.getEquipamiento().getObjeto(seleccion);
+        Objeto objetoEquipado = objeto.getObjeto();
+
+        try {
+            if (this.model.getJugador().getNivel() >= objetoEquipado.getNivel()) {
+
+                this.model.actualizarEstadoDeObjeto(objetoEquipado.getId(), objeto.getAtributos(), objeto.getEncantamientos());
+                this.model.getInventario().addObjeto(objeto);
+
+                this.model.getEquipamiento().eliminarObjeto(seleccion);
 
                 this.actualizarModel();
             }
@@ -38,21 +63,12 @@ public class ControllerEquipar {
         }
     }
 
-    void eliminarObjeto(int seleccion) {
-        ContendedorDeObjeto objeto = this.model.getEquipamiento().getObjeto(seleccion);
-
-//        SQL        
-        this.model.getInventario().addObjeto(objeto);
-
-        this.model.getEquipamiento().eliminarObjeto(seleccion);
-
-        this.view.actualizar();
-    }
-
     public void mostrar() {
         this.view.setVisible(true);
 
         this.actualizarModel();
+
+        this.view.setJugadoresAEquipar(new DefaultComboBoxModel(this.model.getJugadores()));
     }
 
     public void actualizarModel() {
@@ -66,8 +82,6 @@ public class ControllerEquipar {
                 this.model.obtenerEncantamientosDeJugador(nombreDeJugador);
                 this.model.obtenerObjetosDeJugador(nombreDeJugador);
             }
-
-            this.view.setJugadoresAEquipar(new DefaultComboBoxModel(this.model.getJugadores()));
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
