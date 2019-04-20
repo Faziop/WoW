@@ -22,114 +22,148 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nombreDeJugador" min="-2" max="-2" attributes="0"/>
-                          <Component id="botonEquipar" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="botonEquipar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nombreDeJugador" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="292" max="-2" attributes="0"/>
                           <Component id="botonDesequipar" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="292" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreDeRazaYClase" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="labelGolpeCritico" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelHipnosis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelVeneno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelSuerte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="valorGolpeCritico" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorHipnosis" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorVeneno" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorSuerte" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="labelAgilidad" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelMana" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelIntelecto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="labelEstamina" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="valorIntelecto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorEstamina" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorAgilidad" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="valorMana" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="labelArmamento" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="valorArmamento" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="valorIntelecto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorEstamina" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorAgilidad" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorMana" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorGolpeCritico" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorHipnosis" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorVeneno" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="valorSuerte" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jugadoresAEquipar" min="-2" pref="109" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nombreDeJugador" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="nombreDeJugador" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="botonDesequipar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="valorIntelecto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="valorEstamina" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="valorMana" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="valorAgilidad" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="nombreDeRazaYClase" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="labelIntelecto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelEstamina" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelMana" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelAgilidad" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="valorIntelecto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="valorEstamina" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="valorMana" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="valorAgilidad" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="labelArmamento" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="valorArmamento" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelGolpeCritico" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelHipnosis" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSuerte" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelVeneno" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="valorGolpeCritico" min="-2" max="-2" attributes="0"/>
@@ -143,8 +177,13 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               <Component id="botonEquipar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jugadoresAEquipar" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -156,7 +195,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nombre de jugador"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -169,12 +208,7 @@
         <Component class="javax.swing.JList" name="listaEquipamiento">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Objeto 1"/>
-                <StringItem index="1" value="Objeto 2"/>
-                <StringItem index="2" value="Objeto 3"/>
-                <StringItem index="3" value="..."/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -209,12 +243,7 @@
         <Component class="javax.swing.JList" name="listaInventario">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Objeto 1"/>
-                <StringItem index="1" value="Objeto 2"/>
-                <StringItem index="2" value="Objeto 3"/>
-                <StringItem index="3" value="..."/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -231,57 +260,57 @@
         <Property name="text" type="java.lang.String" value="Inventario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="labelIntelecto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Intelecto"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorIntelecto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val1"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="labelEstamina">
       <Properties>
         <Property name="text" type="java.lang.String" value="Estamina"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorEstamina">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val2"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="labelMana">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mana"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorMana">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val3"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="labelAgilidad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agilidad"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorAgilidad">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val4"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
+    <Component class="javax.swing.JLabel" name="labelGolpeCritico">
       <Properties>
         <Property name="text" type="java.lang.String" value="Golpe critico"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorGolpeCritico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val5"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
+    <Component class="javax.swing.JLabel" name="labelHipnosis">
       <Properties>
         <Property name="text" type="java.lang.String" value="Hipnosis"/>
       </Properties>
@@ -296,27 +325,27 @@
     </Component>
     <Component class="javax.swing.JLabel" name="valorHipnosis">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val6"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel18">
+    <Component class="javax.swing.JLabel" name="labelSuerte">
       <Properties>
         <Property name="text" type="java.lang.String" value="Suerte"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorSuerte">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val7"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel20">
+    <Component class="javax.swing.JLabel" name="labelVeneno">
       <Properties>
         <Property name="text" type="java.lang.String" value="Veneno"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="valorVeneno">
       <Properties>
-        <Property name="text" type="java.lang.String" value="val 8"/>
+        <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonDesequipar">
@@ -334,6 +363,45 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEquiparActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelArmamento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Armamento"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="valorArmamento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nombreDeRazaYClase">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jugadoresAEquipar">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jugadoresAEquiparActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Seleccione al jugador:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -33,33 +33,35 @@ public class ObjetoListModel extends AbstractListModel {
         ContendedorDeObjeto objeto = objetos.get(index);
         
         String atributosModificados = "";
-        String colorDeAtributo = "";
+        String colorDeLinea = "";
+        char signoDelValor;
         
         for(Atributo atr : objeto.getAtributos()) {
             
-            switch (atr.getNombre()) {
-                case "Intelecto": colorDeAtributo = "#DAA520"; break;
-                case "Estamina": colorDeAtributo = "green"; break;
-                case "Mana": colorDeAtributo = "blue"; break;
-                case "Agilidad": colorDeAtributo = "tomato"; break;
+            if (atr.getValor() > 0) {
+                signoDelValor = '+';
+                colorDeLinea = "green";
+            } else{                
+                signoDelValor = '-';
+                colorDeLinea = "red";
             }
             
-            atributosModificados += String.format("<br><span style=\"color: %s\">&emsp;+%d %s</span>", colorDeAtributo, atr.getValor(), atr.getNombre());
+            atributosModificados += String.format("<br><span style=\"color: %s\">&emsp;%c %d %s</span>", colorDeLinea, signoDelValor, Math.abs(atr.getValor()), atr.getNombre());
         }
         
         String encantamientosModificados = "";
-        String colorDeEncantamiento = "";
         
         for(Encantamiento enc : objeto.getEncantamientos()) {
             
-            switch (enc.getNombre()) {
-                case "Golpe critico": colorDeEncantamiento = "red"; break;
-                case "Hipnosis": colorDeEncantamiento = "#DA70D6"; break;
-                case "Suerte": colorDeEncantamiento = "#6A5ACD"; break;
-                case "Veneno": colorDeEncantamiento = "#006400"; break;
+            if (enc.getValor() > 0) {
+                signoDelValor = '+';
+                colorDeLinea = "green";
+            } else{                
+                signoDelValor = '-';
+                colorDeLinea = "red";
             }
             
-            encantamientosModificados += String.format("<br><span style=\"color: %s\">&emsp;+%d %s</span>", colorDeEncantamiento, enc.getValor(), enc.getNombre());
+            encantamientosModificados += String.format("<br><span style=\"color: %s\">&emsp;%c %d %s</span>", colorDeLinea, signoDelValor, Math.abs(enc.getValor()), enc.getNombre());
         }
 
         String descripcion = String.format("<html>%s%s%s</html>", objeto.getObjeto().getNombre(), atributosModificados, encantamientosModificados);

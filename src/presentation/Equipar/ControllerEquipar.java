@@ -1,49 +1,67 @@
 package presentation.Equipar;
 
-import logic.Objeto;
+import javax.swing.DefaultComboBoxModel;
 
 public class ControllerEquipar {
 
     ModelEquipar model;
     ViewEquipar view;
 
-    public ControllerEquipar(ModelEquipar me) {
+    public ControllerEquipar(ModelEquipar me, ViewEquipar ve) {
         this.model = me;
-        view = new ViewEquipar(this, me, this.model.getEquipamiento(), this.model.getEquipamiento());
+        this.view = ve;
+        view.setModel(me);
+        view.setController(this);
     }
 
     void agregarObjeto(int seleccion) {
         ContendedorDeObjeto objeto = this.model.getInventario().getObjeto(seleccion);
 
-//        Verificar estado de objeto
+//        Verificar estado de objeto y SQL
         try {
-        this.model.getEquipamiento().addObjeto(objeto);
-        
-        this.model.getInventario().eliminarObjeto(seleccion);
-        
-        this.actualizarView();
-            
-        } catch (Exception ex) { System.out.println(ex.getMessage());}
+            this.model.getEquipamiento().addObjeto(objeto);
+
+            this.model.getInventario().eliminarObjeto(seleccion);
+
+            this.view.actualizar();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     void eliminarObjeto(int seleccion) {
         ContendedorDeObjeto objeto = this.model.getEquipamiento().getObjeto(seleccion);
-        
+
+//        SQL        
         this.model.getInventario().addObjeto(objeto);
-        
+
         this.model.getEquipamiento().eliminarObjeto(seleccion);
-        
-        this.actualizarView();
-    }
-    
-    void actualizarView() {
-        this.view.actualizar();      
+
+        this.view.actualizar();
     }
 
     public void mostrar() {
         this.view.setVisible(true);
-        this.view.getNombreUsuario().setText(this.model.getJugador().getNombre());
-        
-        this.actualizarView();    
+
+        this.actualizarModel();
+    }
+
+    public void actualizarModel() {
+        try {
+            this.model.obtenerJugadoresAEquipar();
+
+            if (this.view.getJugadorAEquipar() != null) {
+                this.model.obtenerJugador(this.view.getJugadorAEquipar());
+                String nombreDeJugador = this.model.getJugador().getNombre();
+                this.model.obtenerAtributosDeJugador(nombreDeJugador);
+                this.model.obtenerEncantamientosDeJugador(nombreDeJugador);
+                this.model.obtenerObjetosDeJugador(nombreDeJugador);
+            }
+
+            this.view.setJugadoresAEquipar(new DefaultComboBoxModel(this.model.getJugadores()));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

@@ -15,6 +15,10 @@ public class ContendedorDeObjeto {
         this.atributos = atributos;
         this.encantamientos = encantamientos;
     }
+
+    ContendedorDeObjeto() {
+        
+    }
     
     public Objeto getObjeto() {
         return objeto;

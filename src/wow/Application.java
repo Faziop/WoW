@@ -52,8 +52,10 @@ public class Application {
         ControllerBorrar cb = new ControllerBorrar(mb, vb);        
         CONTROLLER_BORRAR = cb;
         
+        
         ModelEquipar me = new ModelEquipar();
-        ControllerEquipar ce = new ControllerEquipar(me);        
+        ViewEquipar ve = new ViewEquipar();
+        ControllerEquipar ce = new ControllerEquipar(me, ve);        
         CONTROLLER_EQUIPAR = ce;
         
         ModelTeletransportar mt = new ModelTeletransportar();

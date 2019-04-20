@@ -7,12 +7,25 @@
 package logic;
 
 public class Encantamiento {
+    int identificador;
     String nombre;
     int valor;
 
-    public Encantamiento(String nombre, int valor) {
+    public Encantamiento() {
+    }
+
+    public Encantamiento(int identificador, String nombre, int valor) {
+        this.identificador = identificador;
         this.nombre = nombre;
         this.valor = valor;
+    }
+
+    public int getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(int identificador) {
+        this.identificador = identificador;
     }
     
     public String getNombre() {
