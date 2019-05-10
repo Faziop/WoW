@@ -440,7 +440,7 @@ INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Erick
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Erick', 0);
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Erick', 0);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Gonzalo', 20, 3, 4, 1, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Gonzalo', 20, 3, 4, 1, 4, true);
 
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 4, 'Gonzalo', 0);
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 4, 'Gonzalo', 0);
@@ -451,7 +451,7 @@ INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Gonza
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Gonzalo', 0);
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Gonzalo', 0);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Alonso', 35, 8, 7, 2, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Alonso', 35, 8, 7, 2, 2, true);
 
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(1, 7, 'Alonso', 6);
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 7, 'Alonso', 0);
@@ -463,7 +463,7 @@ INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Alons
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Alonso', 0);
 INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Alonso', 0);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Fazio', 14, 8, 4, 2, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Fazio', 14, 8, 4, 2, 3, true);
 
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 4, 'Fazio', 0);
 INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 4, 'Fazio', 0);
