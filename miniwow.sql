@@ -427,34 +427,75 @@ INSERT INTO ClaseAtributo(valor_inicial, atributo, clase) VALUES(6, 3, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(4, 10);
 INSERT INTO ClaseAtributo(atributo, clase) VALUES(5, 10);
 
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Erick', 0, 5, 1, 1, 1, true);
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Erick', 10, 5, 1, 1, 1, true);
+
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(1, 1, 'Erick', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 1, 'Erick', 12);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(3, 1, 'Erick', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 1, 'Erick', 6);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 1, 'Erick', 0);
+
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Erick', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Erick', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Erick', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Erick', 0);
+
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Gonzalo', 20, 3, 4, 1, 1, true);
+
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 4, 'Gonzalo', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 4, 'Gonzalo', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 4, 'Gonzalo', 0);
+
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Gonzalo', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Gonzalo', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Gonzalo', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Gonzalo', 0);
+
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Alonso', 35, 8, 7, 2, 1, true);
+
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(1, 7, 'Alonso', 6);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 7, 'Alonso', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(3, 7, 'Alonso', 10);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 7, 'Alonso', 0);
+
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Alonso', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Alonso', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Alonso', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Alonso', 0);
+
+INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES('Fazio', 14, 8, 4, 2, 1, true);
+
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 4, 'Fazio', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 4, 'Fazio', 0);
+INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 4, 'Fazio', 0);
+
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Fazio', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Fazio', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Fazio', 0);
+INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Fazio', 0);
 
 INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (1, 'Espada X', 'Arma', 5, false, 'Erick');
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (2, 'Casco Z', 'Casco', 7, false, 'Gonzalo');
-
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(1, 1, 'Erick', 5);
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Erick', 0);
-
 INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(-4, 1, 1, 'Erick', 1);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (2, 'Guantes de cuero', 'Guantes', 3, false, 'Erick');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(7, 4, 1, 'Erick', 2);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (3, 'Pechera Azul', 'Pechera', 5, false, 'Erick');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(2, 3, 1, 'Erick', 3);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (4, 'Daga de hierro', 'Arma', 7, false, 'Alonso');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(-10, 3, 7, 'Alonso', 4);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (5, 'Espada de diamante', 'Arma', 5, false, 'Alonso');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(6, 5, 7, 'Alonso', 5);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (6, 'Casco de titanio', 'Casco', 7, false, 'Alonso');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(3, 1, 7, 'Alonso', 6);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (7, 'Palo de madera', 'Arma', 5, false, 'Fazio');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(5, 2, 4, 'Fazio', 7);
+INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (8, 'Joggers negros', 'Pantalones', 7, false, 'Fazio');
+INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(-3, 5, 4, 'Fazio', 8);
 
-INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(6, 1, 'Erick', 1);
-
--- Aqui cuando se inserta el jugador se insertan los atributos predefinidos en ClaseAtributo con el valor inicial correspondiente
-INSERT INTO Jugador(nombre, nivel, raza, clase, faccion, ubicacion, conectado) VALUES ('Cosi', 0, 3, 4, 1, 1, 0);
-
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(2, 4, 'Cosi', 0); -- (0) SELECT ClaseAtributo.valor_inicial FROM Clase, ClaseAtributo, Atributo WHERE Clase.identificador = ClaseAtributo.clase AND ClaseAtributo.atributo = Atributo.identificador AND Clase.identificador = 4 AND Atributo.identificador = 2;
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(4, 4, 'Cosi', 0);
-INSERT INTO AtributoJugador(atributo, clase, jugador, valor) VALUES(5, 4, 'Cosi', 0);
-
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(1, 'Cosi', 0);
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(2, 'Cosi', 0);
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(3, 'Cosi', 0);
-INSERT INTO EncantamientoJugador(encantamiento, jugador, valor) VALUES(4, 'Cosi', 0);
-
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (14, 'Espada Cosi', 'Arma', 0, false, 'Cosi');
-INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(3, 2, 4, 'Cosi', 14);
-INSERT INTO AtributoObjeto(valor_modificador, atributo, clase, jugador, objeto) VALUES(9, 4, 4, 'Cosi', 14);
-
-INSERT INTO Objeto(identificador, nombre, tipo, nivel_requerido, equipado, jugador) VALUES (15, 'Casco Cosi', 'Casco', 0, false, 'Cosi');
-INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(7, 4, 'Cosi', 15);
-INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(5, 2, 'Cosi', 15);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(7, 3, 'Erick', 1);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(8, 1, 'Erick', 2);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(7, 4, 'Erick', 3);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(2, 2, 'Alonso', 4);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(5, 1, 'Alonso', 5);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(4, 3, 'Alonso', 6);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(2, 1, 'Fazio', 7);
+INSERT INTO EncantamientoObjeto(valor_modificador, encantamiento, jugador, objeto) VALUES(10, 2, 'Fazio', 8);
